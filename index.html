@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LapakBaju — Sweatshirt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="page-root d-flex">
+    <!-- Sidebar (desktop) -->
+    <aside class="sidebar d-none d-md-block bg-light p-4">
+      <div class="brand mb-4">
+        <h4 class="m-0">lapak<b>baju</b></h4>
+      </div>
+      <nav class="mb-3">
+        <h6 class="mb-2">Category</h6>
+        <ul class="list-unstyled small">
+          <li class="py-2"><a href="#">T-Shirt</a></li>
+          <li class="py-2 active"><a href="#">Sweatshirt</a></li>
+          <li class="py-2"><a href="#">Jeans</a></li>
+          <li class="py-2"><a href="#">Pants and Skirt</a></li>
+          <li class="py-2"><a href="#">Stuff and Accessories</a></li>
+        </ul>
+      </nav>
+
+      <div class="filters">
+        <h6 class="mb-2">Filter by</h6>
+        <div class="mb-3">
+          <label class="form-label small">Colour</label>
+          <div class="d-flex gap-2 color-swatches">
+            <button class="swatch" style="background:#111"></button>
+            <button class="swatch" style="background:#fff; border:1px solid #ddd"></button>
+            <button class="swatch" style="background:#b8b8ff"></button>
+            <button class="swatch" style="background:#ffb3c1"></button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Size</label>
+          <div>
+            <select class="form-select form-select-sm">
+              <option>All</option>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm">Apply</button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content flex-fill">
+      <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom">
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-outline-secondary d-md-none" data-bs-toggle="offcanvas"
+            data-bs-target="#mobileSidebar">
+            <i class="bi bi-list"></i>
+          </button>
+          <div class="logo d-none d-md-block">
+            <img src="https://images.unsplash.com/photo-1602810312081-5d0b2d0f6b7b?auto=format&fit=crop&w=80&q=60"
+              alt="logo" class="rounded-circle" width="40">
+          </div>
+          <div class="search ms-2">
+            <div class="input-group">
+              <input class="form-control form-control-sm" placeholder="Search among 100+ products">
+              <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="actions d-flex align-items-center gap-2">
+          <button class="btn btn-link small">ENG</button>
+          <button class="btn btn-outline-primary btn-sm">Wishlist</button>
+          <button class="btn btn-primary btn-sm">Your Cart <i class="bi bi-cart-fill ms-1"></i></button>
+        </div>
+      </header>
+
+      <section class="container-fluid p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h3 class="mb-0">Sweatshirt</h3>
+            <small class="text-muted">Main Page • Category • Sweatshirt</small>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <select class="form-select form-select-sm">
+              <option>Sort by - Most Popular</option>
+              <option>Newest</option>
+              <option>Price: Low to High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row g-4 product-grid">
+          <!-- Repeatable product card -->
+          <!-- We'll include 9 cards to match the reference -->
+          <!-- Card 1 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap">
+                <span class="badge bg-primary">NEW</span>
+              </div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Line-Pattern Zipper Sweatshirt</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200 <small class="text-muted text-decoration-line-through">$240</small></div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap">
+                <!-- no top badge -->
+              </div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1519741492339-1c1c2b9a3957?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Black Fantasy Sweatshirt</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200</div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap">
+                <span class="badge bg-info">BEST SELLER</span>
+              </div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Brooklyn-NYC Sweatshirt</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200 <small class="text-muted text-decoration-line-through">$420</small></div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap"><span class="badge bg-warning text-dark">HOT PROMO</span></div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1520975910968-3e91b2f6f3d8?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Basic Plain Shirt</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200 <small class="text-muted text-decoration-line-through">$220</small></div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap"></div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1547448410-3b9fc3a1b2d0?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Basic Orange Sweatshirt</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200</div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap"></div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1599949337678-1a2f0a11f9a8?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Alul Sweatshirt X Alvent G</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200</div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap"><span class="badge bg-warning text-dark">HOT PROMO</span></div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1520975669076-40f35c9a7f3f?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Flowers Printed Sweatshirt</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200 <small class="text-muted text-decoration-line-through">$420</small></div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap"></div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1520975485876-5b5e6f6b6a9b?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Relaxed Fit Printed Sweatshirt</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200</div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="badge-wrap"></div>
+              <div class="product-thumb">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=60"
+                  class="card-img-top" alt="product">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Letter Pattern Knitted Vest</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="price">$200</div>
+                  </div>
+                  <button class="btn btn-purple btn-sm add-cart"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Mobile offcanvas sidebar -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Filters</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="mb-3">
+        <label class="form-label small">Category</label>
+        <ul class="list-unstyled">
+          <li> Sweathirt</li>
+          <li> T-Shirt</li>
+          <li> Jeans</li>
+        </ul>
+      </div>
+      <div>
+        <label class="form-label small">Colour</label>
+        <div class="d-flex gap-2 color-swatches">
+          <button class="swatch" style="background:#111"></button>
+          <button class="swatch" style="background:#fff; border:1px solid #ddd"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Simple cart button animation
+    document.querySelectorAll('.add-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        btn.classList.add('added');
+        setTimeout(() => btn.classList.remove('added'), 700);
+      });
+    });
+  </script>
+</body>
+
+</html>
