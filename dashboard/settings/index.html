@@ -37,7 +37,11 @@
           </button>
           <h4 class="m-0">Settings</h4>
         </div>
-        <div class="avatar rounded-circle bg-primary text-white d-flex align-items-center justify-content-center">S
+        <div class="d-flex align-items-center gap-2">
+          <div class="me-3 text-end small text-muted">Welcome, <strong id="ownerLabel">Admin</strong></div>
+          <a href="../profile/index.html"
+            class="avatar rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+            id="avatarBtn">S</a>
         </div>
       </header>
       <section class="container-fluid p-4">
@@ -45,16 +49,26 @@
           <div class="col-12 col-md-6">
             <div class="card p-3">
               <h6>Account</h6>
-              <form>
-                <div class="mb-2"><label class="form-label small">Name</label><input
+              <form id="accountForm">
+                <div class="mb-2"><label class="form-label small">Name</label><input id="nameInput"
                     class="form-control form-control-sm" value="Admin"></div>
-                <div class="mb-2"><label class="form-label small">Email</label><input
+                <div class="mb-2"><label class="form-label small">Email</label><input id="emailInput"
                     class="form-control form-control-sm" value="admin@example.com"></div>
-                <button class="btn btn-primary btn-sm">Save</button>
+                <button type="button" id="saveAccountBtn" class="btn btn-primary btn-sm">Save</button>
               </form>
             </div>
           </div>
           <div class="col-12 col-md-6">
+            <div class="card p-3 mb-3" id="profileCard">
+              <h6>Profile</h6>
+              <div class="small text-muted mb-2">Name: <strong id="profileName">Admin</strong></div>
+              <div class="small text-muted mb-2">Email: <strong id="profileEmail">admin@example.com</strong></div>
+              <div class="small text-muted mb-2">Total Balance: <strong id="profileBalance">$0.00</strong></div>
+              <div class="d-flex gap-2">
+                <a href="../profile/index.html" class="btn btn-sm btn-primary">Edit Profile</a>
+                <button id="copyBalanceBtn" class="btn btn-outline-secondary btn-sm">Copy Balance</button>
+              </div>
+            </div>
             <div class="card p-3">
               <h6>Security</h6>
               <p class="small text-muted">Manage your account security and logout.</p>
@@ -66,6 +80,56 @@
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const profileName = document.getElementById('profileName');
+      const profileEmail = document.getElementById('profileEmail');
+      const profileBalance = document.getElementById('profileBalance');
+      const ownerLabel = document.getElementById('ownerLabel');
+      const nameInput = document.getElementById('nameInput');
+      const emailInput = document.getElementById('emailInput');
+
+      const storedName = localStorage.getItem('owner_name') || 'Admin';
+      const storedEmail = localStorage.getItem('owner_email') || 'admin@example.com';
+      const rawBal = localStorage.getItem('dashboard_balance');
+      const bal = rawBal ? Number(rawBal) : 0;
+
+      const fmt = v => '$' + Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      if (profileName) profileName.textContent = storedName;
+      if (profileEmail) profileEmail.textContent = storedEmail;
+      if (profileBalance) profileBalance.textContent = fmt(bal);
+      if (ownerLabel) ownerLabel.textContent = storedName;
+      if (nameInput) nameInput.value = storedName;
+      if (emailInput) emailInput.value = storedEmail;
+
+      const saveBtn = document.getElementById('saveAccountBtn');
+      if (saveBtn) saveBtn.addEventListener('click', () => {
+        const newName = (nameInput && nameInput.value.trim()) || 'Admin';
+        const newEmail = (emailInput && emailInput.value.trim()) || 'admin@example.com';
+        localStorage.setItem('owner_name', newName);
+        localStorage.setItem('owner_email', newEmail);
+        if (profileName) profileName.textContent = newName;
+        if (profileEmail) profileEmail.textContent = newEmail;
+        if (ownerLabel) ownerLabel.textContent = newName;
+        const old = saveBtn.textContent;
+        saveBtn.textContent = 'Saved';
+        setTimeout(() => saveBtn.textContent = old, 1000);
+      });
+
+      const copyBtn = document.getElementById('copyBalanceBtn');
+      if (copyBtn) copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(profileBalance.textContent);
+          const old = copyBtn.textContent;
+          copyBtn.textContent = 'Copied';
+          setTimeout(() => copyBtn.textContent = old, 1000);
+        } catch (e) {
+          alert('Unable to copy');
+        }
+      });
+    });
+  </script>
   <!-- Mobile offcanvas sidebar -->
   <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
     <div class="offcanvas-header">
