@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart — E-store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- site header copied from root index.html -->
+  <!-- Mobile offcanvas sidebar (replicates root structure) -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+    <div class="offcanvas-header ms-auto">
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="brand mb-3">
+        <div class="logo-mark">E</div>
+        <h4 class="m-0 text-decoration-none fs-4"><a href="../index.html"
+            style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
+      </div>
+      <nav class="mb-3">
+        <h6 class="mb-2">Category</h6>
+        <ul class="list-unstyled small">
+          <li class="py-2"><a href="#">T-Shirt</a></li>
+          <li class="py-2 active"><a href="#">Sweatshirt</a></li>
+          <li class="py-2"><a href="#">Jeans</a></li>
+          <li class="py-2"><a href="#">Pants and Skirt</a></li>
+          <li class="py-2"><a href="#">Stuff and Accessories</a></li>
+        </ul>
+      </nav>
+
+      <div class="filters">
+        <h6 class="mb-2">Filter by</h6>
+        <div class="mb-3">
+          <label class="form-label small">Colour</label>
+          <div class="d-flex gap-2 color-swatches">
+            <button class="swatch" style="background:#111"></button>
+            <button class="swatch" style="background:#fff; border:1px solid #ddd"></button>
+            <button class="swatch" style="background:#b8b8ff"></button>
+            <button class="swatch" style="background:#ffb3c1"></button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Size</label>
+          <div>
+            <select class="form-select form-select-sm">
+              <option>All</option>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom">
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary d-md-none" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="logo d-flex align-items-center gap-2">
+        <div class="logo-mark">E</div>
+        <h4 class="m-0 text-decoration-none fs-6"><a href="../index.html"
+            style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
+      </div>
+      <div class="search me-2">
+        <div class="input-group d-none d-md-flex">
+          <input class="form-control form-control-sm" placeholder="Search among 100+ products">
+          <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="actions d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button>
+      <button id="headerWishlist" class="btn btn-sm d-flex align-items-center"
+        style="background-color: #EAE7FD; position: relative;">
+        <i class="bi bi-heart me-1" style="color: #583BFF;"></i>
+        <span class="d-none d-md-inline" style="color: #583BFF;">Wishlist</span>
+        <span id="wishlistCount" class="badge bg-danger me-auto js-wishlist-quantity"
+          style="position: absolute; top: -10px; right: -10px;">0</span>
+      </button>
+      <button id="headerCart" class="btn btn-sm d-flex align-items-center"
+        style="background-color: #EAE7FD; position: relative;">
+        <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
+        <span class="d-none d-md-inline" style="color: #583BFF;">Your Cart</span>
+        <span id="cartCount" class="badge bg-danger ms-2" style="position: absolute; top: -10px; right: -10px;">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container cart-root my-5">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <a href="../index.html" class="back-link">‹ Back</a>
+        <h1 class="cart-title mt-3">YOUR CART</h1>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card p-4 animate-up">
+          <div class="cart-items">
+            <!-- Item 1 -->
+            <div class="cart-item d-flex align-items-center gap-3 py-3 border-bottom">
+              <button class="btn btn-sm btn-light remove-item" aria-label="remove">✕</button>
+              <img src="../data/sweatshirt.js" alt="product" class="product-thumb"
+                onerror="this.src='https://via.placeholder.com/80'">
+              <div class="flex-fill">
+                <div class="product-title">Simply Soluble Elev8 Doll CBD Bath Bomb</div>
+                <div class="product-sub small text-muted">Mint / 100 mg / x1</div>
+              </div>
+              <div class="text-end">
+                <div class="price">$<span class="item-price">50.00</span></div>
+                <div class="qty-controls mt-2 d-flex align-items-center justify-content-end gap-2">
+                  <button class="btn btn-outline-secondary btn-sm qty-minus">−</button>
+                  <input class="form-control qty-input" value="1" size="2">
+                  <button class="btn btn-outline-secondary btn-sm qty-plus">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="cart-item d-flex align-items-center gap-3 py-3 border-bottom">
+              <button class="btn btn-sm btn-light remove-item" aria-label="remove">✕</button>
+              <img src="../data/cart.js" alt="product" class="product-thumb"
+                onerror="this.src='https://via.placeholder.com/80'">
+              <div class="flex-fill">
+                <div class="product-title">Water Soluble CBD Powder</div>
+                <div class="product-sub small text-muted">100 mg / x1</div>
+              </div>
+              <div class="text-end">
+                <div class="price">$<span class="item-price">50.00</span></div>
+                <div class="qty-controls mt-2 d-flex align-items-center justify-content-end gap-2">
+                  <button class="btn btn-outline-secondary btn-sm qty-minus">−</button>
+                  <input class="form-control qty-input" value="1" size="2">
+                  <button class="btn btn-outline-secondary btn-sm qty-plus">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="cart-actions d-flex justify-content-between align-items-center mt-3">
+              <div class="w-50">
+                <div class="small text-muted">Have a coupon? Enter your code.</div>
+                <div class="d-flex gap-2 mt-2">
+                  <input class="form-control form-control-sm" placeholder="Coupon code" id="couponInput">
+                  <button id="applyCoupon" class="btn btn-outline-secondary btn-sm">APPLY</button>
+                </div>
+              </div>
+              <div>
+                <button id="updateCart" class="btn btn-link small">⟳ UPDATE CART</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="card p-4 animate-up delay">
+          <h6 class="mb-3">CART TOTALS</h6>
+          <div class="small text-muted mb-2 d-flex justify-content-between"><span>Shipping (3-5 Business
+              Days)</span><span>Free</span></div>
+          <div class="small text-muted mb-2 d-flex justify-content-between"><span>TAX (est)</span><span>$0</span></div>
+          <div class="small text-muted mb-2 d-flex justify-content-between"><span>Subtotal</span><span
+              id="subtotal">$100.00</span></div>
+          <hr>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <strong>Total</strong>
+            <strong id="grandTotal">$100.00</strong>
+          </div>
+          <button class="btn btn-primary w-100 mb-2">PROCEED TO CHECKOUT</button>
+          <a href="../index.html" class="d-block text-center small">‹ CONTINUE SHOPPING</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Simple cart math and interactions
+    function fmt(v) { return '$' + Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+    function recalc() {
+      const rows = document.querySelectorAll('.cart-item');
+      let sum = 0;
+      rows.forEach(row => {
+        const price = Number(row.querySelector('.item-price').textContent) || 0;
+        const qty = Number(row.querySelector('.qty-input').value) || 0;
+        sum += price * qty;
+      });
+      document.getElementById('subtotal').textContent = fmt(sum);
+      document.getElementById('grandTotal').textContent = fmt(sum);
+      // persist subtotal to localStorage as dashboard_balance so other pages can pick it up
+      try { localStorage.setItem('dashboard_balance', String(sum)); } catch (e) { }
+    }
+
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('.qty-plus')) {
+        const input = e.target.parentElement.querySelector('.qty-input'); input.value = Number(input.value) + 1; recalc();
+      }
+      if (e.target.matches('.qty-minus')) {
+        const input = e.target.parentElement.querySelector('.qty-input'); input.value = Math.max(0, Number(input.value) - 1); recalc();
+      }
+      if (e.target.matches('.remove-item')) {
+        const row = e.target.closest('.cart-item'); row && row.remove(); recalc();
+      }
+      if (e.target.id === 'updateCart' || e.target.id === 'applyCoupon') {
+        recalc();
+      }
+    });
+
+    window.addEventListener('load', () => { recalc(); });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

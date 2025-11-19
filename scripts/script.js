@@ -13,7 +13,7 @@ sweatshirt.forEach((sweat) => {
           <i class="bi bi-heart"></i>
         </button>
         <div class="product-thumb">
-          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=60"
+          <img src="${sweat.image}"
             class="card-img-top" alt="product">
         </div>
         <div class="card-body">

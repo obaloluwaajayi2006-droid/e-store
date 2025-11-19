@@ -57,57 +57,57 @@
       </div>
     </aside>
 
-    
 
-  <!-- Mobile offcanvas sidebar -->
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
-    <div class="offcanvas-header ms-auto">
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body">
-      <!-- replicate desktop sidebar content here for small screens -->
-      <div class="brand mb-3">
-        <h4 class="m-0 text-decoration-none fs-4"><a href="index.html"
-            style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
-      </div>
-      <nav class="mb-3">
-        <h6 class="mb-2">Category</h6>
-        <ul class="list-unstyled small">
-          <li class="py-2"><a href="#">T-Shirt</a></li>
-          <li class="py-2 active"><a href="#">Sweatshirt</a></li>
-          <li class="py-2"><a href="#">Jeans</a></li>
-          <li class="py-2"><a href="#">Pants and Skirt</a></li>
-          <li class="py-2"><a href="#">Stuff and Accessories</a></li>
-        </ul>
-      </nav>
 
-      <div class="filters">
-        <h6 class="mb-2">Filter by</h6>
-        <div class="mb-3">
-          <label class="form-label small">Colour</label>
-          <div class="d-flex gap-2 color-swatches">
-            <button class="swatch" style="background:#111"></button>
-            <button class="swatch" style="background:#fff; border:1px solid #ddd"></button>
-            <button class="swatch" style="background:#b8b8ff"></button>
-            <button class="swatch" style="background:#ffb3c1"></button>
-          </div>
+    <!-- Mobile offcanvas sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+      <div class="offcanvas-header ms-auto">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- replicate desktop sidebar content here for small screens -->
+        <div class="brand mb-3">
+          <h4 class="m-0 text-decoration-none fs-4"><a href="index.html"
+              style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
         </div>
-        <div class="mb-3">
-          <label class="form-label small">Size</label>
-          <div>
-            <select class="form-select form-select-sm">
-              <option>All</option>
-              <option>XS</option>
-              <option>S</option>
-              <option>M</option>
-              <option>L</option>
-            </select>
+        <nav class="mb-3">
+          <h6 class="mb-2">Category</h6>
+          <ul class="list-unstyled small">
+            <li class="py-2"><a href="#">T-Shirt</a></li>
+            <li class="py-2 active"><a href="#">Sweatshirt</a></li>
+            <li class="py-2"><a href="#">Jeans</a></li>
+            <li class="py-2"><a href="#">Pants and Skirt</a></li>
+            <li class="py-2"><a href="#">Stuff and Accessories</a></li>
+          </ul>
+        </nav>
+
+        <div class="filters">
+          <h6 class="mb-2">Filter by</h6>
+          <div class="mb-3">
+            <label class="form-label small">Colour</label>
+            <div class="d-flex gap-2 color-swatches">
+              <button class="swatch" style="background:#111"></button>
+              <button class="swatch" style="background:#fff; border:1px solid #ddd"></button>
+              <button class="swatch" style="background:#b8b8ff"></button>
+              <button class="swatch" style="background:#ffb3c1"></button>
+            </div>
           </div>
+          <div class="mb-3">
+            <label class="form-label small">Size</label>
+            <div>
+              <select class="form-select form-select-sm">
+                <option>All</option>
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm">Apply</button>
         </div>
-        <button class="btn btn-primary btn-sm">Apply</button>
       </div>
     </div>
-  </div>
 
     <!-- Main content -->
     <main class="content flex-fill position-sticky top-0">
@@ -117,7 +117,8 @@
             data-bs-target="#mobileSidebar">
             <i class="bi bi-list"></i>
           </button>
-          <div class="logo d-lg-none d-sm-flex">
+          <div class="logo d-lg-none d-sm-flex gap-2 align-items-center d-flex">
+            <div class="logo-mark">E</div>
             <h4 class="m-0 text-decoration-none fs-6"><a href="index.html"
                 style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
           </div>
@@ -129,7 +130,7 @@
           </div>
         </div>
         <div class="actions d-flex align-items-center gap-2">
-            <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button>
+          <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button>
           <button id="headerWishlist" class="btn btn-sm d-flex align-items-center"
             style="background-color: #EAE7FD; position: relative;">
             <i class="bi bi-heart me-1" style="color: #583BFF;"></i>
@@ -137,13 +138,13 @@
             <span id="wishlistCount" class="badge bg-danger me-auto js-wishlist-quantity"
               style="position: absolute; top: -10px; right: -10px;">0</span>
           </button>
-          <button id="headerCart" class="btn btn-sm d-flex align-items-center"
+          <a id="headerCart" href="cart/index.html" class="btn btn-sm d-flex align-items-center"
             style="background-color: #EAE7FD; position: relative;">
             <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
             <span class="d-none d-md-inline" style="color: #583BFF;">Your Cart</span>
             <span id="cartCount" class="badge bg-danger ms-2"
               style="position: absolute; top: -10px; right: -10px;">0</span>
-          </button>
+          </a>
         </div>
       </header>
 
@@ -163,7 +164,7 @@
         </div>
 
         <div class="row g-4 product-grid js-product-grid">
-          
+
         </div>
       </section>
     </main>
