@@ -96,7 +96,7 @@ const github = () => {
       console.log(user);
       if (user) {
         setTimeout(() => {
-          window.location.href = 'index.html'
+          window.location.href = '../index.html'
         }, 1000)
       } else {
         window.location.href = '../signup/index.html'
