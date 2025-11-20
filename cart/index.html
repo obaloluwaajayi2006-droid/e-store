@@ -93,7 +93,8 @@
         style="background-color: #EAE7FD; position: relative;">
         <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
         <span class="d-none d-md-inline" style="color: #583BFF;">Your Cart</span>
-        <span id="cartCount" class="badge bg-danger ms-2 js-cart-quantity" style="position: absolute; top: -10px; right: -10px;">0</span>
+        <span id="cartCount" class="badge bg-danger ms-2 js-cart-quantity"
+          style="position: absolute; top: -10px; right: -10px;">0</span>
       </button>
     </div>
   </header>
@@ -102,7 +103,7 @@
     <div class="row">
       <div class="col-12 mb-4">
         <a href="../index.html" class="back-link">‹ Back</a>
-        <h1 class="cart-title mt-3">YOUR CART</h1>
+        <h1 class="cart-title mt-3">YOUR CART(<span class="js-total-quantity">0</span>)</h1>
       </div>
     </div>
 
@@ -111,7 +112,7 @@
         <div class="card p-4 animate-up">
           <div class="cart-items">
             <div class="js-cart-items">
-              
+
             </div>
 
             <div class="cart-actions d-flex justify-content-between align-items-center mt-3">
@@ -141,7 +142,7 @@
           <hr>
           <div class="d-flex justify-content-between align-items-center mb-3">
             <strong>Total</strong>
-            <strong id="grandTotal">$100.00</strong>
+            <strong id="grandTotal" class="js-total-price">$100.00</strong>
           </div>
           <button class="btn btn-primary w-100 mb-2">PROCEED TO CHECKOUT</button>
           <a href="../index.html" class="d-block text-center small">‹ CONTINUE SHOPPING</a>

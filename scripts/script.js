@@ -2,14 +2,24 @@ import { sweatshirt } from '../data/sweatshirt.js';
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Update cart quantity on all pages
-document.querySelector('.js-cart-quantity').innerHTML = cart.length;
+// Ensure all cart items have quantity
+cart = cart.map(item => {
+  if (!item.quantity) item.quantity = 1;
+  return item;
+});
 
+// Update header cart quantity (unique products)
+const updateCartQuantity = () => {
+  document.querySelector('.js-cart-quantity').textContent = cart.length;
+};
+updateCartQuantity();
+
+// Helper functions for total quantity and total price
+const getTotalQuantity = () => cart.reduce((sum, item) => sum + item.quantity, 0);
+const getTotalPrice = () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
 // PRODUCT PAGE CODE
-
 if (document.querySelector('.js-product-grid')) {
-
   let productHTML = '';
 
   sweatshirt.forEach((sweat, index) => {
@@ -33,8 +43,7 @@ if (document.querySelector('.js-product-grid')) {
                   <small class="text-muted text-decoration-line-through">$240</small>
                 </div>
               </div>
-              <button onclick="addToCartBtn(${index})" 
-                class="btn btn-purple btn-sm add-cart js-add-to-cart">
+              <button onclick="addToCartBtn(${index})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
                 <i class="bi bi-cart-plus"></i>
               </button>
             </div>
@@ -47,31 +56,25 @@ if (document.querySelector('.js-product-grid')) {
   document.querySelector('.js-product-grid').innerHTML = productHTML;
 }
 
-
-
 // ADD TO CART FUNCTION
-
 window.addToCartBtn = (index) => {
   const product = sweatshirt[index];
 
-  cart.push(product);
+  const existingIndex = cart.findIndex(item => item.id === product.id);
+  if (existingIndex !== -1) {
+    cart[existingIndex].quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
 
   localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartQuantity();
 
-  document.querySelector('.js-cart-quantity').innerHTML = cart.length;
+  if (document.querySelector('.js-cart-items')) renderCart();
 };
 
-
-
-// CART PAGE CODE — ONLY SHOW ITEMS IN CART
-
+// CART PAGE CODE
 if (document.querySelector('.js-cart-items')) {
-
-  // Ensure all cart items have quantity
-  cart = cart.map(item => {
-    if (!item.quantity) item.quantity = 1;
-    return item;
-  });
 
   function renderCart() {
     let cartProduct = '';
@@ -98,8 +101,15 @@ if (document.querySelector('.js-cart-items')) {
 
     document.querySelector('.js-cart-items').innerHTML = cartProduct;
 
-    // Update total cart quantity in header
-    document.querySelector('.js-cart-quantity').innerHTML = cart.reduce((sum, i) => sum + i.quantity, 0);
+    // Update totals
+    if (document.querySelector('.js-total-quantity')) {
+      document.querySelector('.js-total-quantity').textContent = getTotalQuantity();
+    }
+    if (document.querySelector('.js-total-price')) {
+      document.querySelector('.js-total-price').textContent = getTotalPrice().toFixed(2);
+    }
+
+    updateCartQuantity();
   }
 
   // Remove item
@@ -125,6 +135,5 @@ if (document.querySelector('.js-cart-items')) {
     }
   };
 
-  // Render cart on page load
   renderCart();
 }
