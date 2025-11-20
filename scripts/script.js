@@ -14,9 +14,15 @@ const updateCartQuantity = () => {
 };
 updateCartQuantity();
 
+
+const taxFee = 20;
+document.querySelector('.js-tax-fee').textContent = taxFee;
+
+
 // Helper functions for total quantity and total price
 const getTotalQuantity = () => cart.reduce((sum, item) => sum + item.quantity, 0);
-const getTotalPrice = () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+const getSubTotalPrice = () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+const getTotalPrice = () => cart.reduce((sum, item) => taxFee + (sum + item.price * item.quantity), 0);
 
 // PRODUCT PAGE CODE
 if (document.querySelector('.js-product-grid')) {
@@ -104,6 +110,9 @@ if (document.querySelector('.js-cart-items')) {
     // Update totals
     if (document.querySelector('.js-total-quantity')) {
       document.querySelector('.js-total-quantity').textContent = getTotalQuantity();
+    }
+    if (document.querySelector('.js-subtotal-price')) {
+      document.querySelector('.js-subtotal-price').textContent = getSubTotalPrice().toFixed(2);
     }
     if (document.querySelector('.js-total-price')) {
       document.querySelector('.js-total-price').textContent = getTotalPrice().toFixed(2);
