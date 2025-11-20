@@ -81,3 +81,7 @@ signInWithPopup(auth, provider)
   });
 }
 window.google = google;
+
+const github = () => {
+  alert('hi');
+}
