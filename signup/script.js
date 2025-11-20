@@ -50,7 +50,7 @@ const createAccount = () => {
   }
 }
 
-// Continue with google button
+// Continue with google  & github button
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
@@ -78,10 +78,10 @@ const google = () => {
       console.log(user);
       if (user) {
         setTimeout(() => {
-          window.location.href = 'dashboard.html'
+          window.location.href = '../index.html'
         }, 1000)
       } else {
-        window.location.href = 'index.html'
+        window.location.href = '../signup/index.html'
       };
     }).catch((error) => {
       const errorCode = error.code;
@@ -96,10 +96,10 @@ const github = () => {
       console.log(user);
       if (user) {
         setTimeout(() => {
-          window.location.href = 'dashboard.html'
+          window.location.href = 'index.html'
         }, 1000)
       } else {
-        window.location.href = 'index.html'
+        window.location.href = '../signup/index.html'
       };
     }).catch((error) => {
       const errorCode = error.code;
