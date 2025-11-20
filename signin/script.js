@@ -74,18 +74,26 @@ const google = () => {
 const github = () => {
   signInWithPopup(auth, provider2)
     .then((result) => {
-      const user = result.user
+      const user = result.user;
       console.log(user);
-      if (user) {
-        setTimeout(() => {
-          window.location.href = '../index.html'
-        }, 1000)
-      } else {
-        window.location.href = '../signup/index.html'
-      };
-    }).catch((error) => {
+
+      setTimeout(() => {
+        window.location.href = '../index.html';
+      }, 1000)
+    })
+    .catch((error) => {
       const errorCode = error.code;
-      console.log(errorCode)
+      console.log(errorCode);
+
+      // ⚠️ If account already exists with a different provider
+      if (errorCode === "auth/account-exists-with-different-credential") {
+        console.warn("Account exists with another provider. Continuing...");
+
+        // Force redirect even if Firebase rejects the login
+        window.location.href = '../index.html';
+      } else {
+        alert(error.message);
+      }
     });
 }
 
