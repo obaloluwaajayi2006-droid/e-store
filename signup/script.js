@@ -53,7 +53,7 @@ const createAccount = () => {
 // Continue with google button
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -69,19 +69,43 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
+const provider2 = new GithubAuthProvider();
 
 const google = () => {
-signInWithPopup(auth, provider)
-  .then((result) => {
-    const user = result.user
-    console.log(user)
-  }).catch((error) => {
-    const errorCode = error.code;
-    console.log(errorCode)
-  });
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const user = result.user
+      console.log(user);
+      if (user) {
+        setTimeout(() => {
+          window.location.href = 'dashboard.html'
+        }, 1000)
+      } else {
+        window.location.href = 'index.html'
+      };
+    }).catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+    });
 }
-window.google = google;
 
 const github = () => {
-  alert('hi');
+  signInWithPopup(auth, provider2)
+    .then((result) => {
+      const user = result.user
+      console.log(user);
+      if (user) {
+        setTimeout(() => {
+          window.location.href = 'dashboard.html'
+        }, 1000)
+      } else {
+        window.location.href = 'index.html'
+      };
+    }).catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode)
+    });
 }
+
+window.google = google;
+window.github = github;
