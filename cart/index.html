@@ -93,7 +93,7 @@
         style="background-color: #EAE7FD; position: relative;">
         <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
         <span class="d-none d-md-inline" style="color: #583BFF;">Your Cart</span>
-        <span id="cartCount" class="badge bg-danger ms-2" style="position: absolute; top: -10px; right: -10px;">0</span>
+        <span id="cartCount" class="badge bg-danger ms-2 js-cart-quantity" style="position: absolute; top: -10px; right: -10px;">0</span>
       </button>
     </div>
   </header>
@@ -110,42 +110,8 @@
       <div class="col-12 col-lg-8">
         <div class="card p-4 animate-up">
           <div class="cart-items">
-            <!-- Item 1 -->
-            <div class="cart-item d-flex align-items-center gap-3 py-3 border-bottom">
-              <button class="btn btn-sm btn-light remove-item" aria-label="remove">✕</button>
-              <img src="../data/sweatshirt.js" alt="product" class="product-thumb"
-                onerror="this.src='https://via.placeholder.com/80'">
-              <div class="flex-fill">
-                <div class="product-title">Simply Soluble Elev8 Doll CBD Bath Bomb</div>
-                <div class="product-sub small text-muted">Mint / 100 mg / x1</div>
-              </div>
-              <div class="text-end">
-                <div class="price">$<span class="item-price">50.00</span></div>
-                <div class="qty-controls mt-2 d-flex align-items-center justify-content-end gap-2">
-                  <button class="btn btn-outline-secondary btn-sm qty-minus">−</button>
-                  <input class="form-control qty-input" value="1" size="2">
-                  <button class="btn btn-outline-secondary btn-sm qty-plus">+</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="cart-item d-flex align-items-center gap-3 py-3 border-bottom">
-              <button class="btn btn-sm btn-light remove-item" aria-label="remove">✕</button>
-              <img src="../data/cart.js" alt="product" class="product-thumb"
-                onerror="this.src='https://via.placeholder.com/80'">
-              <div class="flex-fill">
-                <div class="product-title">Water Soluble CBD Powder</div>
-                <div class="product-sub small text-muted">100 mg / x1</div>
-              </div>
-              <div class="text-end">
-                <div class="price">$<span class="item-price">50.00</span></div>
-                <div class="qty-controls mt-2 d-flex align-items-center justify-content-end gap-2">
-                  <button class="btn btn-outline-secondary btn-sm qty-minus">−</button>
-                  <input class="form-control qty-input" value="1" size="2">
-                  <button class="btn btn-outline-secondary btn-sm qty-plus">+</button>
-                </div>
-              </div>
+            <div class="js-cart-items">
+              
             </div>
 
             <div class="cart-actions d-flex justify-content-between align-items-center mt-3">
@@ -185,41 +151,7 @@
 
   </main>
 
-  <script>
-    // Simple cart math and interactions
-    function fmt(v) { return '$' + Number(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-
-    function recalc() {
-      const rows = document.querySelectorAll('.cart-item');
-      let sum = 0;
-      rows.forEach(row => {
-        const price = Number(row.querySelector('.item-price').textContent) || 0;
-        const qty = Number(row.querySelector('.qty-input').value) || 0;
-        sum += price * qty;
-      });
-      document.getElementById('subtotal').textContent = fmt(sum);
-      document.getElementById('grandTotal').textContent = fmt(sum);
-      // persist subtotal to localStorage as dashboard_balance so other pages can pick it up
-      try { localStorage.setItem('dashboard_balance', String(sum)); } catch (e) { }
-    }
-
-    document.addEventListener('click', (e) => {
-      if (e.target.matches('.qty-plus')) {
-        const input = e.target.parentElement.querySelector('.qty-input'); input.value = Number(input.value) + 1; recalc();
-      }
-      if (e.target.matches('.qty-minus')) {
-        const input = e.target.parentElement.querySelector('.qty-input'); input.value = Math.max(0, Number(input.value) - 1); recalc();
-      }
-      if (e.target.matches('.remove-item')) {
-        const row = e.target.closest('.cart-item'); row && row.remove(); recalc();
-      }
-      if (e.target.id === 'updateCart' || e.target.id === 'applyCoupon') {
-        recalc();
-      }
-    });
-
-    window.addEventListener('load', () => { recalc(); });
-  </script>
+  <script type="module" src="../scripts/script.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
