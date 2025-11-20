@@ -15,14 +15,7 @@ const updateCartQuantity = () => {
 updateCartQuantity();
 
 
-const taxFee = 20;
-document.querySelector('.js-tax-fee').textContent = taxFee;
 
-
-// Helper functions for total quantity and total price
-const getTotalQuantity = () => cart.reduce((sum, item) => sum + item.quantity, 0);
-const getSubTotalPrice = () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-const getTotalPrice = () => cart.reduce((sum, item) => taxFee + (sum + item.price * item.quantity), 0);
 
 // PRODUCT PAGE CODE
 if (document.querySelector('.js-product-grid')) {
@@ -62,7 +55,9 @@ if (document.querySelector('.js-product-grid')) {
   document.querySelector('.js-product-grid').innerHTML = productHTML;
 }
 
-// ADD TO CART FUNCTION
+
+
+
 window.addToCartBtn = (index) => {
   const product = sweatshirt[index];
 
@@ -81,6 +76,16 @@ window.addToCartBtn = (index) => {
 
 // CART PAGE CODE
 if (document.querySelector('.js-cart-items')) {
+  // ADD TO CART FUNCTION
+  const taxFee = 20;
+  document.querySelector('.js-tax-fee').innerHTML = taxFee;
+
+
+  // Helper functions for total quantity and total price
+  const getTotalQuantity = () => cart.reduce((sum, item) => sum + item.quantity, 0);
+  const getSubTotalPrice = () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const getTotalPrice = () => cart.reduce((sum, item) => taxFee + (sum + item.price * item.quantity), 0);
+
 
   function renderCart() {
     let cartProduct = '';
