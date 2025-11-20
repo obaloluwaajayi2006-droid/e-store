@@ -39,7 +39,7 @@ if (document.querySelector('.js-product-grid')) {
             <div class="d-flex justify-content-between align-items-center">
               <div>
                 <div class="price">$${sweat.price} 
-                  <small class="text-muted text-decoration-line-through">$240</small>
+                  <small class="text-muted text-decoration-line-through">$${sweat.price + 50}</small>
                 </div>
               </div>
               <button onclick="addToCartBtn(${index})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
@@ -77,7 +77,7 @@ window.addToCartBtn = (index) => {
 // CART PAGE CODE
 if (document.querySelector('.js-cart-items')) {
   // ADD TO CART FUNCTION
-  const taxFee = 20;
+  const taxFee = 2;
   document.querySelector('.js-tax-fee').innerHTML = taxFee;
 
 
