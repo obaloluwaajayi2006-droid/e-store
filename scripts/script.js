@@ -6,9 +6,8 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 document.querySelector('.js-cart-quantity').innerHTML = cart.length;
 
 
-// ---------------------------------------------
 // PRODUCT PAGE CODE
-// ---------------------------------------------
+
 if (document.querySelector('.js-product-grid')) {
 
   let productHTML = '';
@@ -50,9 +49,8 @@ if (document.querySelector('.js-product-grid')) {
 
 
 
-// ---------------------------------------------
 // ADD TO CART FUNCTION
-// ---------------------------------------------
+
 window.addToCartBtn = (index) => {
   const product = sweatshirt[index];
 
@@ -65,32 +63,68 @@ window.addToCartBtn = (index) => {
 
 
 
-// ---------------------------------------------
 // CART PAGE CODE — ONLY SHOW ITEMS IN CART
-// ---------------------------------------------
+
 if (document.querySelector('.js-cart-items')) {
 
-  let cartProduct = '';
-
-  cart.forEach((item, index) => {
-    cartProduct += `
-      <div class="cart-item d-flex align-items-center gap-3 py-3 border-bottom">
-        <button class="btn btn-sm btn-light remove-item" aria-label="remove">✕</button>
-        <img src="${item.image}" alt="${item.productName}" class="product-thumb">
-        <div class="flex-fill">
-          <div class="product-title">${item.productName}</div>
-        </div>
-        <div class="text-end">
-          <div class="price">$<span class="item-price">${item.price}</span></div>
-          <div class="qty-controls mt-2 d-flex align-items-center justify-content-end gap-2">
-            <button class="btn btn-outline-secondary btn-sm qty-minus">−</button>
-            <input class="form-control qty-input" value="1" size="2">
-            <button class="btn btn-outline-secondary btn-sm qty-plus">+</button>
-          </div>
-        </div>
-      </div>
-    `;
+  // Ensure all cart items have quantity
+  cart = cart.map(item => {
+    if (!item.quantity) item.quantity = 1;
+    return item;
   });
 
-  document.querySelector('.js-cart-items').innerHTML = cartProduct;
+  function renderCart() {
+    let cartProduct = '';
+
+    cart.forEach((item, index) => {
+      cartProduct += `
+        <div class="cart-item d-flex align-items-center gap-3 py-3 border-bottom">
+          <button onclick="removeFromCart(${index})" class="btn btn-sm btn-light remove-item" aria-label="remove">✕</button>
+          <img src="${item.image}" alt="${item.productName}" class="product-thumb">
+          <div class="flex-fill">
+            <div class="product-title">${item.productName}</div>
+          </div>
+          <div class="text-end">
+            <div class="price">$<span class="item-price">${item.price * item.quantity}</span></div>
+            <div class="qty-controls mt-2 d-flex align-items-center justify-content-end gap-2">
+              <button class="btn btn-outline-secondary btn-sm qty-minus" onclick="decreaseQty(${index})">−</button>
+              <input class="form-control qty-input text-center" value="${item.quantity}" size="2" readonly>
+              <button class="btn btn-outline-secondary btn-sm qty-plus" onclick="increaseQty(${index})">+</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    document.querySelector('.js-cart-items').innerHTML = cartProduct;
+
+    // Update total cart quantity in header
+    document.querySelector('.js-cart-quantity').innerHTML = cart.reduce((sum, i) => sum + i.quantity, 0);
+  }
+
+  // Remove item
+  window.removeFromCart = (index) => {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  };
+
+  // Increase quantity
+  window.increaseQty = (index) => {
+    cart[index].quantity += 1;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  };
+
+  // Decrease quantity
+  window.decreaseQty = (index) => {
+    if (cart[index].quantity > 1) {
+      cart[index].quantity -= 1;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+  };
+
+  // Render cart on page load
+  renderCart();
 }
