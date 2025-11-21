@@ -164,6 +164,18 @@ function renderDelivery() {
     displayDiv2.innerHTML = citySelect.value;
   });
 
+
+  confirmDelivery.addEventListener('click', () => {
+    const selectedCity = citySelect.value;
+
+    if (selectedCity === 'Ogbomosho' || selectedCity === 'Ikeja' || selectedCity === 'Garki' ||selectedCity === 'Ibadan' || selectedCity === 'Ilorin' || selectedCity === 'Oyo' || selectedCity === 'Taraba' || selectedCity === 'Abuja') {
+      window.location.href = '../payment/payment.html';
+    } else {
+      alert('Please select a city!');
+    }
+  });
+
+
   const monthNames = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
