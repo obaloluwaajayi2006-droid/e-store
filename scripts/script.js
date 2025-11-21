@@ -155,6 +155,35 @@ function renderDelivery() {
   const deliveryContainer = document.querySelector('.js-delivery-items');
   if (!deliveryContainer) return;
 
+  const citySelect = document.getElementById('city');
+  const displayDiv = document.getElementById('displayCity');
+  const displayDiv2 = document.getElementById('displayCity2');
+
+  citySelect.addEventListener('change', () => {
+    displayDiv.innerHTML = citySelect.value;
+    displayDiv2.innerHTML = citySelect.value;
+  });
+
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const today = new Date(); // current date
+
+  const currentDay = today.getDate();
+  const currentMonthName = monthNames[today.getMonth()];
+
+  // Next two days
+  const dayAfterTomorrow = new Date(today);
+  dayAfterTomorrow.setDate(today.getDate() + 2);
+
+  todayDate.innerHTML = `${currentDay} ${currentMonthName}`;
+  tomDate.innerHTML = `${dayAfterTomorrow.getDate()} ${monthNames[dayAfterTomorrow.getMonth()]}`;
+
+  console.log(`Today: ${currentDay} ${currentMonthName}`);
+  console.log(`Day after tomorrow: ${dayAfterTomorrow.getDate()} ${monthNames[dayAfterTomorrow.getMonth()]}`);
+
   let html = '';
   cart.forEach((item, index) => {
     html += `
@@ -170,6 +199,8 @@ function renderDelivery() {
   deliveryContainer.innerHTML = html;
   updateTotals();
 }
+
+// const 
 
 // ================= INITIAL PAGE LOAD ===================
 renderCart();
