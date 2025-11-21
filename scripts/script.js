@@ -151,6 +151,27 @@ window.decreaseQty = (index) => {
   }
 };
 
+function renderDelivery() {
+  const deliveryContainer = document.querySelector('.js-delivery-items');
+  if (!deliveryContainer) return;
+
+  let html = '';
+  cart.forEach((item, index) => {
+    html += `
+      <div class="d-flex align-items-center gap-3 mb-2">
+        <img src="${item.image}" alt="product" class="img-thumbnail" style="width:80px; height:60px; object-fit:cover">
+        <div class="flex-fill">
+          <div class="fw-semibold mb-0">${item.productName}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  deliveryContainer.innerHTML = html;
+  updateTotals();
+}
+
 // ================= INITIAL PAGE LOAD ===================
 renderCart();
+renderDelivery()
 renderCheckout();
