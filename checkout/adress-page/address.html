@@ -48,75 +48,85 @@
 
       <!-- LEFT: CUSTOMER ADDRESS FORM -->
       <div class="col-12 col-lg-8">
-        <div class="card p-3">
-          <h6 class="mb-3">1. CUSTOMER ADDRESS</h6>
-          <form id="addressForm">
-            <p id="errorMessage" class="alert alert-danger text-center" style="display: none;">Please fill in all
-              details</p>
-            <p id="errorMessage2" class="alert alert-danger text-center" style="display: none;">Please fill correct
-              inputs</p>
+        <div class="">
+          <div class="card p-3">
+            <h6 class="mb-3">1. CUSTOMER ADDRESS</h6>
+            <form id="addressForm">
+              <p id="errorMessage" class="alert alert-danger text-center" style="display: none;">Please fill in all
+                details</p>
+              <p id="errorMessage2" class="alert alert-danger text-center" style="display: none;">Please fill correct
+                inputs</p>
 
-            <div class="row g-2">
-              <div class="col-md-6">
-                <label class="form-label small">First Name</label>
-                <input id="firstName" class="form-control form-control-sm">
-              </div>
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <label class="form-label small">First Name</label>
+                  <input id="firstName" class="form-control form-control-sm">
+                </div>
 
-              <div class="col-md-6">
-                <label class="form-label small">Last Name</label>
-                <input id="lastName" class="form-control form-control-sm">
-              </div>
+                <div class="col-md-6">
+                  <label class="form-label small">Last Name</label>
+                  <input id="lastName" class="form-control form-control-sm">
+                </div>
 
-              <div class="col-6 col-md-3">
-                <label class="form-label small">Prefix</label>
-                <input class="form-control form-control-sm" value="+234">
-              </div>
+                <div class="col-6 col-md-3">
+                  <label class="form-label small">Prefix</label>
+                  <input class="form-control form-control-sm" value="+234">
+                </div>
 
-              <div class="col-6 col-md-9">
-                <label class="form-label small">Phone Number</label>
-                <input id="phone" class="form-control form-control-sm">
-              </div>
+                <div class="col-6 col-md-9">
+                  <label class="form-label small">Phone Number</label>
+                  <input id="phone" class="form-control form-control-sm">
+                </div>
 
-              <div class="col-12">
-                <label class="form-label small">Delivery Address</label>
-                <input id="address" class="form-control form-control-sm" placeholder="Street, House number">
-              </div>
+                <div class="col-12">
+                  <label class="form-label small">Delivery Address</label>
+                  <input id="address" class="form-control form-control-sm" placeholder="Street, House number">
+                </div>
 
-              <div class="col-12">
-                <label class="form-label small">Additional Information</label>
-                <textarea id="additional" class="form-control form-control-sm" rows="2"
-                  placeholder="Apartment, landmark, etc."></textarea>
-              </div>
+                <div class="col-12">
+                  <label class="form-label small">Additional Information</label>
+                  <textarea id="additional" class="form-control form-control-sm" rows="2"
+                    placeholder="Apartment, landmark, etc."></textarea>
+                </div>
 
-              <div class="col-6 col-md-4">
-                <label class="form-label small">Region</label>
-                <select id="region" class="form-select form-select-sm">
-                  <option>Oyo</option>
-                  <option>Lagos</option>
-                  <option>Abuja</option>
-                </select>
-              </div>
+                <div class="col-6 col-md-4">
+                  <label class="form-label small">Region</label>
+                  <select id="region" class="form-select form-select-sm">
+                    <option>Oyo</option>
+                    <option>Lagos</option>
+                    <option>Abuja</option>
+                  </select>
+                </div>
 
-              <div class="col-6 col-md-4">
-                <label class="form-label small">City</label>
-                <select id="city" class="form-select form-select-sm">
-                  <option>Ogbomosho</option>
-                  <option>Ikeja</option>
-                  <option>Garki</option>
-                  <option>Ibadan</option>
-                  <option>Ilorin</option>
-                  <option>Oyo</option>
-                  <option>Taraba</option>
-                  <option>Abuja</option>
-                </select>
-              </div>
+                <div class="col-6 col-md-4">
+                  <label class="form-label small">City</label>
+                  <select id="city" class="form-select form-select-sm">
+                    <option>Ogbomosho</option>
+                    <option>Ikeja</option>
+                    <option>Garki</option>
+                    <option>Ibadan</option>
+                    <option>Ilorin</option>
+                    <option>Oyo</option>
+                    <option>Taraba</option>
+                    <option>Abuja</option>
+                  </select>
+                </div>
 
-              <div class="col-12 text-end mt-3">
-                <button type="button" id="cancelBtn" class="btn btn-link me-2">Cancel</button>
-                <button onclick="addressSave()" type="button" id="saveBtn" class="btn btn-primary">Save</button>
+                <div class="col-12 text-end mt-3">
+                  <button type="button" id="cancelBtn" class="btn btn-link me-2">Cancel</button>
+                  <button onclick="addressSave()" type="button" id="saveBtn" class="btn btn-primary">Save</button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+        </div>
+        <div class="card p-3 mt-3 animate-up delay-2">
+          <h6 class="mb-2">2. DELIVERY DETAILS</h6>
+          <p class="small text-muted">Add address details to select payment method in the next step.</p>
+        </div>
+        <div class="card p-3 mt-3 animate-up delay-2">
+          <h6 class="mb-2">3. PAYMENT METHOD</h6>
+          <p class="small text-muted">Add delivery details to select payment method in the next step.</p>
         </div>
       </div>
 
@@ -150,7 +160,7 @@
 
           <button id="confirmOrder" class="btn btn-primary w-100 disabled">Confirm Order</button>
 
-          <a href="../index.html" class="d-block text-center small mt-2">‹ Continue Shopping</a>
+          <a href="/index.html" class="d-block text-center small mt-2">‹ Continue Shopping</a>
         </div>
       </div>
 

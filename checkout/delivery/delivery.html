@@ -37,13 +37,13 @@
         </div>
         <div class="actions d-flex align-items-center gap-2">
           <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button>
-          <button id="headerWishlist" class="btn btn-sm d-flex align-items-center"
+          <!-- <button id="headerWishlist" class="btn btn-sm d-flex align-items-center"
             style="background-color: #EAE7FD; position: relative;">
             <i class="bi bi-heart me-1" style="color: #583BFF;"></i>
             <span class="d-none d-md-inline" style="color: #583BFF;">Wishlist</span>
             <span id="wishlistCount" class="badge bg-danger me-auto js-wishlist-quantity"
               style="position: absolute; top: -10px; right: -10px;">0</span>
-          </button>
+          </button> -->
           <button id="headerCart" class="btn btn-sm d-flex align-items-center"
             style="background-color: #EAE7FD; position: relative;">
             <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
@@ -63,8 +63,8 @@
                     width="18px">1.
                   CUSTOMER ADDRESS
                 </h6>
-                <p class="small text-muted mb-0">OBALOLUWA AJAYI</p>
-                <p class="small text-muted mb-0">Cele Titun Lane 19 House 23</p>
+                <p class="small text-muted mb-0" id="deliveryName"></p>
+                <p class="small text-muted mb-0" id="deliveryAddress"></p>
               </div>
             </a>
             <div class="card p-3 animate-up">
@@ -91,8 +91,7 @@
 
               <div class="card p-3 mt-3 animate-up delay">
                 <div class="d-flex align-items-center gap-3">
-                  <img src="https://via.placeholder.com/80x60?text=img" alt="product" class="img-thumbnail"
-                    style="width:80px;height:60px;object-fit:cover">
+                  <img src="" alt="product" class="img-thumbnail" style="width:80px; height:60px; object-fit:cover">
                   <div class="flex-fill">
                     <div class="small text-muted">Pick-up Station</div>
                     <div class="fw-semibold">50000 MAH Power Banks With LED...</div>
@@ -102,7 +101,7 @@
               </div>
 
               <div class="mt-4 text-end">
-                <a href="../payment/payment.html"><button id="confirmDelivery" class="btn btn-secondary">Confirm
+                <a href="../payment/payment.html"><button id="confirmDelivery" class="btn btn-primary">Confirm
                     delivery details</button></a>
               </div>
             </div>
@@ -141,7 +140,7 @@
 
               <button id="confirmOrder" class="btn btn-primary w-100 disabled">Confirm Order</button>
 
-              <a href="../index.html" class="d-block text-center small mt-2">‹ Continue Shopping</a>
+              <a href="/index.html" class="d-block text-center small mt-2">‹ Continue Shopping</a>
             </div>
           </div>
         </div>
@@ -170,7 +169,7 @@
     </div>
   </div> -->
 
-  <script type="module" src="../adress-page/address.js"></script>
+  <script type="module" src="delivery.js"></script>
   <script type="module" src="/scripts/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
