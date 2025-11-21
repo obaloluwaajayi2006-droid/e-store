@@ -168,10 +168,11 @@ function renderDelivery() {
   confirmDelivery.addEventListener('click', () => {
     const selectedCity = citySelect.value;
 
-    if (selectedCity === 'Ogbomosho' || selectedCity === 'Ikeja' || selectedCity === 'Garki' ||selectedCity === 'Ibadan' || selectedCity === 'Ilorin' || selectedCity === 'Oyo' || selectedCity === 'Taraba' || selectedCity === 'Abuja') {
+    if (selectedCity === 'Ogbomosho' || selectedCity === 'Ikeja' || selectedCity === 'Garki' || selectedCity === 'Ibadan' || selectedCity === 'Ilorin' || selectedCity === 'Oyo' || selectedCity === 'Taraba' || selectedCity === 'Abuja') {
+      errorMessage.style.display = 'none';
       window.location.href = '../payment/payment.html';
     } else {
-      alert('Please select a city!');
+      errorMessage.style.display = 'block';
     }
   });
 
@@ -211,8 +212,6 @@ function renderDelivery() {
   deliveryContainer.innerHTML = html;
   updateTotals();
 }
-
-// const 
 
 // ================= INITIAL PAGE LOAD ===================
 renderCart();
