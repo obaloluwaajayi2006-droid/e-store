@@ -71,7 +71,7 @@
               <div class="card p-3 mb-3 animate-up delay">
                 <h6 class="mb-2 d-flex align-items-center gap-1"><img src="/images/checkmark.png" alt="" width="18px">2.
                   DELIVERY DETAILS</h6>
-                <p class="small text-muted mb-0" id="deliveryCity3">Your pick-up station</p>
+                <p class="small text-muted mb-0" id="displayCity">Your pick-up station</p>
                 <p class="small text-muted mb-0">Delivery between <span id="todayDate2">27 November</span> and
                   <span id="tomDate2">27 November</span>
                 </p>
@@ -118,24 +118,36 @@
           </div>
 
           <div class="col-12 col-lg-4">
-            <div class="card p-3 animate-up">
-              <h6 class="mb-3">Order summary</h6>
-              <div class="small text-muted d-flex justify-content-between"><span>Item's total (2)</span><span
-                  id="itemsTotal">₦ 43,594</span></div>
-              <div class="d-flex justify-content-between small text-muted mt-2"><span>Delivery fees</span><span
-                  id="deliveryFee">₦ 1,500</span></div>
-              <hr>
-              <div class="d-flex justify-content-between align-items-center mb-3"><strong>Total</strong><strong
-                  id="grandTotal">₦ 45,094</strong></div>
-              <div class="input-group mb-2">
-                <input id="coupon" class="form-control form-control-sm" placeholder="Enter code here">
-                <button id="applyCoupon" class="btn btn-sm btn-outline-secondary">APPLY</button>
+            <div class="card p-3 js-checkout-summary">
+
+              <h6 class="mb-3">Order Summary</h6>
+
+              <div class="d-flex justify-content-between small text-muted">
+                <span>Items (<span class="js-total-quantity">0</span>)</span>
+                <span>$<span class="js-subtotal-price">0.00</span></span>
               </div>
-              <button id="payNow" class="btn btn-secondary w-100 disabled">Confirm order</button>
-              <div class="small text-muted mt-2">(Complete the steps in order to proceed)</div>
+
+              <div class="d-flex justify-content-between small text-muted mt-2">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+
+              <div class="d-flex justify-content-between small text-muted mt-2">
+                <span>Tax</span>
+                <span>$<span class="js-tax-fee">0.00</span></span>
+              </div>
+
+              <hr>
+
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <strong>Total</strong>
+                <strong>$<span class="js-total-price">0.00</span></strong>
+              </div>
+
+              <button id="confirmOrder" class="btn btn-secondary w-100 disabled">Confirm Order</button>
+
+              <a href="/index.html" class="d-block text-center small mt-2">‹ Continue Shopping</a>
             </div>
-          </div>
-        </div>
       </section>
 
     </main>

@@ -3,6 +3,28 @@ import { sweatshirt } from '../data/sweatshirt.js';
 // Get cart from localStorage or initialize
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+let selectedPickupStation = 'null'; // global variable
+
+// Place this at the top of your script
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const today = new Date();
+const currentDay = today.getDate();
+const currentMonthName = monthNames[today.getMonth()];
+
+const dayAfterTomorrow = new Date(today);
+dayAfterTomorrow.setDate(today.getDate() + 2);
+
+const dayAfterTomorrowDay = dayAfterTomorrow.getDate();
+const dayAfterTomorrowMonth = monthNames[dayAfterTomorrow.getMonth()];
+
+console.log(currentDay, currentMonthName); // Today
+console.log(dayAfterTomorrowDay, dayAfterTomorrowMonth); // Day after tomorrow
+
+
 // Ensure every cart item has quantity
 cart = cart.map(item => ({ ...item, quantity: item.quantity || 1 }));
 
@@ -160,9 +182,11 @@ function renderDelivery() {
   const displayDiv2 = document.getElementById('displayCity2');
 
   citySelect.addEventListener('change', () => {
-    displayDiv.innerHTML = citySelect.value;
-    displayDiv2.innerHTML = citySelect.value;
+    selectedPickupStation = citySelect.value; // update global variable
+    displayDiv.innerHTML = selectedPickupStation;
+    displayDiv2.innerHTML = selectedPickupStation;
   });
+  console.log(selectedPickupStation)
 
 
   confirmDelivery.addEventListener('click', () => {
@@ -176,26 +200,9 @@ function renderDelivery() {
     }
   });
 
-
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-
-  const today = new Date(); // current date
-
-  const currentDay = today.getDate();
-  const currentMonthName = monthNames[today.getMonth()];
-
-  // Next two days
-  const dayAfterTomorrow = new Date(today);
-  dayAfterTomorrow.setDate(today.getDate() + 2);
-
   todayDate.innerHTML = `${currentDay} ${currentMonthName}`;
-  tomDate.innerHTML = `${dayAfterTomorrow.getDate()} ${monthNames[dayAfterTomorrow.getMonth()]}`;
+  tomDate.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
 
-  console.log(`Today: ${currentDay} ${currentMonthName}`);
-  console.log(`Day after tomorrow: ${dayAfterTomorrow.getDate()} ${monthNames[dayAfterTomorrow.getMonth()]}`);
 
   let html = '';
   cart.forEach((item, index) => {
@@ -213,7 +220,18 @@ function renderDelivery() {
   updateTotals();
 }
 
+function renderPayment() {
+  const paymentContainer = document.querySelector('.js-payment-page');
+  if (!paymentContainer) return;
+
+  todayDate2.innerHTML = `${currentDay} ${currentMonthName}`;
+  tomDate2.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
+  const displayDiv = document.getElementById('displayCity');
+  displayDiv.innerHTML = selectedPickupStation;
+  console.log(selectedPickupStation)
+}
 // ================= INITIAL PAGE LOAD ===================
 renderCart();
 renderDelivery()
+renderPayment()
 renderCheckout();
