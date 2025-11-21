@@ -4,83 +4,82 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Address — E-store</title>
+  <title>Checkout — E-store</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="address.css">
+
   <style>
-    /* small inline fallback */
     .page-root {
-      min-height: 100vh
+      min-height: 100vh;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
   <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom">
     <div class="d-flex align-items-center gap-3">
       <div class="logo d-flex align-items-center gap-2">
         <div class="logo-mark">E</div>
-        <h4 class="m-0 text-decoration-none fs-5"><a href="/index.html"
-            style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
-      </div>
-      <div class="search me-2">
-        <div class="input-group d-none d-md-flex">
-          <input class="form-control form-control-sm" placeholder="Search among 100+ products">
-          <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
-        </div>
+        <h4 class="m-0 fs-5">
+          <a href="/index.html" style="text-decoration: none;color:#583BFF;"><b>E-store</b></a>
+        </h4>
       </div>
     </div>
+
     <div class="actions d-flex align-items-center gap-2">
-      <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button>
-      <button id="headerWishlist" class="btn btn-sm d-flex align-items-center"
-        style="background-color: #EAE7FD; position: relative;">
-        <i class="bi bi-heart me-1" style="color: #583BFF;"></i>
-        <span class="d-none d-md-inline" style="color: #583BFF;">Wishlist</span>
-        <span id="wishlistCount" class="badge bg-danger me-auto js-wishlist-quantity"
-          style="position: absolute; top: -10px; right: -10px;">0</span>
-      </button>
-      <button id="headerCart" class="btn btn-sm d-flex align-items-center"
-        style="background-color: #EAE7FD; position: relative;">
-        <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
-        <span class="d-none d-md-inline" style="color: #583BFF;">Your Cart</span>
-        <span id="cartCount" class="badge bg-danger ms-2 js-cart-quantity"
-          style="position: absolute; top: -10px; right: -10px;">0</span>
-      </button>
+      <a href="/cart/index.html" style="text-decoration:none;">
+        <button class="btn btn-sm d-flex align-items-center" style="background-color:#EAE7FD;position:relative;">
+          <i class="bi bi-cart-fill me-1" style="color:#583BFF;"></i>
+          <span class="d-none d-md-inline" style="color:#583BFF;">Your Cart</span>
+          <span class="badge bg-danger js-cart-quantity" style="position:absolute;top:-10px;right:-10px;">0</span>
+        </button>
+      </a>
     </div>
   </header>
 
+  <!-- PAGE BODY -->
   <section class="container-fluid p-4">
     <div class="row g-4">
+
+      <!-- LEFT: CUSTOMER ADDRESS FORM -->
       <div class="col-12 col-lg-8">
-        <div class="card p-3 animate-up">
+        <div class="card p-3">
           <h6 class="mb-3">1. CUSTOMER ADDRESS</h6>
           <form id="addressForm">
+            <p id="errorMessage" class="alert alert-danger text-center" style="display: none;">Please fill in all
+              details</p>
+            <p id="errorMessage2" class="alert alert-danger text-center" style="display: none;">Please fill correct
+              inputs</p>
+
             <div class="row g-2">
-              <div class="col-12 col-md-6">
+              <div class="col-md-6">
                 <label class="form-label small">First Name</label>
-                <input id="firstName" class="form-control form-control-sm" />
+                <input id="firstName" class="form-control form-control-sm">
               </div>
-              <div class="col-12 col-md-6">
+
+              <div class="col-md-6">
                 <label class="form-label small">Last Name</label>
-                <input id="lastName" class="form-control form-control-sm" />
+                <input id="lastName" class="form-control form-control-sm">
               </div>
 
               <div class="col-6 col-md-3">
                 <label class="form-label small">Prefix</label>
-                <input class="form-control form-control-sm" value="+234" />
+                <input class="form-control form-control-sm" value="+234">
               </div>
+
               <div class="col-6 col-md-9">
                 <label class="form-label small">Phone Number</label>
-                <input id="phone" class="form-control form-control-sm" />
+                <input id="phone" class="form-control form-control-sm">
               </div>
 
               <div class="col-12">
                 <label class="form-label small">Delivery Address</label>
-                <input id="address" class="form-control form-control-sm" placeholder="Street, House number" />
+                <input id="address" class="form-control form-control-sm" placeholder="Street, House number">
               </div>
 
               <div class="col-12">
@@ -97,6 +96,7 @@
                   <option>Abuja</option>
                 </select>
               </div>
+
               <div class="col-6 col-md-4">
                 <label class="form-label small">City</label>
                 <select id="city" class="form-select form-select-sm">
@@ -113,57 +113,51 @@
 
               <div class="col-12 text-end mt-3">
                 <button type="button" id="cancelBtn" class="btn btn-link me-2">Cancel</button>
-                <a href="../delivery/delivery.html"><button type="button" id="saveBtn" class="btn btn-primary">Save</button></a>
+                <button onclick="addressSave()" type="button" id="saveBtn" class="btn btn-primary">Save</button>
               </div>
             </div>
           </form>
         </div>
-
-        <div class="card p-3 mt-3 animate-up delay">
-          <h6 class="mb-2">2. DELIVERY DETAILS</h6>
-          <p class="small text-muted">Add your address to select delivery options and estimated times at checkout.</p>
-        </div>
-
-        <div class="card p-3 mt-3 animate-up delay-2">
-          <h6 class="mb-2">3. PAYMENT METHOD</h6>
-          <p class="small text-muted">Select payment method in the next step.</p>
-        </div>
       </div>
 
+      <!-- RIGHT: ORDER SUMMARY -->
       <div class="col-12 col-lg-4">
-        <div class="card p-3 animate-up">
-          <h6 class="mb-3">Order summary</h6>
-          <div class="small text-muted d-flex justify-content-between"><span>Item's total (2)</span><span
-              id="itemsTotal">₦ 43,594</span></div>
-          <div class="d-flex justify-content-between small text-muted mt-2"><span>Shipping</span><span>Free</span>
+        <div class="card p-3 js-checkout-summary">
+
+          <h6 class="mb-3">Order Summary</h6>
+
+          <div class="d-flex justify-content-between small text-muted">
+            <span>Items (<span class="js-total-quantity">0</span>)</span>
+            <span>$<span class="js-subtotal-price">0.00</span></span>
           </div>
+
+          <div class="d-flex justify-content-between small text-muted mt-2">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+
+          <div class="d-flex justify-content-between small text-muted mt-2">
+            <span>Tax</span>
+            <span>$<span class="js-tax-fee">0.00</span></span>
+          </div>
+
           <hr>
-          <div class="d-flex justify-content-between align-items-center mb-3"><strong>Total</strong><strong
-              id="grandTotal">₦ 45,204</strong></div>
-          <button id="confirmOrder" class="btn btn-primary w-100 disabled">Confirm order</button>
-          <a href="../index.html" class="d-block text-center small mt-2">‹ Go back & continue shopping</a>
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <strong>Total</strong>
+            <strong>$<span class="js-total-price">0.00</span></strong>
+          </div>
+
+          <button id="confirmOrder" class="btn btn-primary w-100 disabled">Confirm Order</button>
+
+          <a href="../index.html" class="d-block text-center small mt-2">‹ Continue Shopping</a>
         </div>
       </div>
+
     </div>
   </section>
-  </main>
-  </div>
-
-
-
-  <script>
-    // small interactions: save -> persist to localStorage and notify
-    // document.getElementById('saveBtn').addEventListener('click', () => {
-    //   const data = {
-    //     first: document.getElementById('firstName').value || '',
-    //     last: document.getElementById('lastName').value || '',
-    //     phone: document.getElementById('phone').value || '',
-    //     address: document.getElementById('address').value || ''
-    //   };
-    //   try { localStorage.setItem('checkout_address', JSON.stringify(data)); alert('Address saved'); } catch (e) { alert('Unable to save'); }
-    // });
-    // document.getElementById('cancelBtn').addEventListener('click', () => { window.location.href = '../index.html'; });
-  </script>
+  <script type="module" src="./address.js"></script>
+  <script type="module" src="/scripts/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
