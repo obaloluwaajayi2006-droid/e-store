@@ -173,6 +173,53 @@ window.decreaseQty = (index) => {
   }
 };
 
+// function renderDelivery() {
+//   const deliveryContainer = document.querySelector('.js-delivery-items');
+//   if (!deliveryContainer) return;
+
+//   const citySelect = document.getElementById('city');
+//   const displayDiv = document.getElementById('displayCity');
+//   const displayDiv2 = document.getElementById('displayCity2');
+
+//   citySelect.addEventListener('change', () => {
+//     selectedPickupStation = citySelect.value; // update global variable
+//     displayDiv.innerHTML = selectedPickupStation;
+//     displayDiv2.innerHTML = selectedPickupStation;
+//   });
+//   console.log(selectedPickupStation)
+
+
+//   confirmDelivery.addEventListener('click', () => {
+//     const selectedCity = citySelect.value;
+
+//     if (selectedCity === 'Ogbomosho' || selectedCity === 'Ikeja' || selectedCity === 'Garki' || selectedCity === 'Ibadan' || selectedCity === 'Ilorin' || selectedCity === 'Oyo' || selectedCity === 'Taraba' || selectedCity === 'Abuja') {
+//       errorMessage.style.display = 'none';
+//       window.location.href = '../payment/payment.html';
+//     } else {
+//       errorMessage.style.display = 'block';
+//     }
+//   });
+
+//   todayDate.innerHTML = `${currentDay} ${currentMonthName}`;
+//   tomDate.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
+
+
+//   let html = '';
+//   cart.forEach((item, index) => {
+//     html += `
+//       <div class="d-flex align-items-center gap-3 mb-2">
+//         <img src="${item.image}" alt="product" class="img-thumbnail" style="width:80px; height:60px; object-fit:cover">
+//         <div class="flex-fill">
+//           <div class="fw-semibold mb-0">${item.productName}</div>
+//         </div>
+//       </div>
+//     `;
+//   });
+
+//   deliveryContainer.innerHTML = html;
+//   updateTotals();
+// }
+
 function renderDelivery() {
   const deliveryContainer = document.querySelector('.js-delivery-items');
   if (!deliveryContainer) return;
@@ -181,18 +228,27 @@ function renderDelivery() {
   const displayDiv = document.getElementById('displayCity');
   const displayDiv2 = document.getElementById('displayCity2');
 
+  // Set default pickup station immediately (before user changes)
+  selectedPickupStation = citySelect.value;
+  displayDiv.innerHTML = selectedPickupStation;
+  displayDiv2.innerHTML = selectedPickupStation;
+
+  // Update when user changes the select
   citySelect.addEventListener('change', () => {
-    selectedPickupStation = citySelect.value; // update global variable
+    selectedPickupStation = citySelect.value;
     displayDiv.innerHTML = selectedPickupStation;
     displayDiv2.innerHTML = selectedPickupStation;
   });
-  console.log(selectedPickupStation)
-
 
   confirmDelivery.addEventListener('click', () => {
     const selectedCity = citySelect.value;
 
-    if (selectedCity === 'Ogbomosho' || selectedCity === 'Ikeja' || selectedCity === 'Garki' || selectedCity === 'Ibadan' || selectedCity === 'Ilorin' || selectedCity === 'Oyo' || selectedCity === 'Taraba' || selectedCity === 'Abuja') {
+    if (
+      selectedCity === 'Ogbomosho' || selectedCity === 'Ikeja' ||
+      selectedCity === 'Garki' || selectedCity === 'Ibadan' ||
+      selectedCity === 'Ilorin' || selectedCity === 'Oyo' ||
+      selectedCity === 'Taraba' || selectedCity === 'Abuja'
+    ) {
       errorMessage.style.display = 'none';
       window.location.href = '../payment/payment.html';
     } else {
@@ -200,12 +256,12 @@ function renderDelivery() {
     }
   });
 
+  // Set dates (already calculated globally)
   todayDate.innerHTML = `${currentDay} ${currentMonthName}`;
   tomDate.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
 
-
   let html = '';
-  cart.forEach((item, index) => {
+  cart.forEach((item) => {
     html += `
       <div class="d-flex align-items-center gap-3 mb-2">
         <img src="${item.image}" alt="product" class="img-thumbnail" style="width:80px; height:60px; object-fit:cover">
@@ -220,16 +276,34 @@ function renderDelivery() {
   updateTotals();
 }
 
+// function renderPayment() {
+//   const paymentContainer = document.querySelector('.js-payment-page');
+//   if (!paymentContainer) return;
+
+//   todayDate2.innerHTML = `${currentDay} ${currentMonthName}`;
+//   tomDate2.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
+//   const displayDiv = document.getElementById('displayCity');
+//   displayDiv.innerHTML = selectedPickupStation;
+//   console.log(selectedPickupStation)
+// }
+
 function renderPayment() {
   const paymentContainer = document.querySelector('.js-payment-page');
   if (!paymentContainer) return;
 
+  // Dates
   todayDate2.innerHTML = `${currentDay} ${currentMonthName}`;
   tomDate2.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
-  const displayDiv = document.getElementById('displayCity');
-  displayDiv.innerHTML = selectedPickupStation;
-  console.log(selectedPickupStation)
+
+  // Display selected pickup station on payment page
+  const displayDiv = document.getElementById('displayCity2');
+  if (displayDiv) {
+    displayDiv.innerHTML = selectedPickupStation;
+  }
+
+  console.log("Pickup Station:", selectedPickupStation);
 }
+
 // ================= INITIAL PAGE LOAD ===================
 renderCart();
 renderDelivery()
