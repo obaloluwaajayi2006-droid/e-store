@@ -130,14 +130,9 @@
           </div>
         </div>
         <div class="actions d-flex align-items-center gap-2">
-          <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button>
-          <!-- <button id="headerWishlist" class="btn btn-sm d-flex align-items-center"
-            style="background-color: #EAE7FD; position: relative;">
-            <i class="bi bi-heart me-1" style="color: #583BFF;"></i>
-            <span class="d-none d-md-inline" style="color: #583BFF;">Wishlist</span>
-            <span id="wishlistCount" class="badge bg-danger me-auto js-wishlist-quantity"
-              style="position: absolute; top: -10px; right: -10px;">0</span>
-          </button> -->
+          <p class="mb-0 fs-6">Hi, <span class="fw-semibold" id="userName"></span></p>
+          <button id="profileImg" style="border-radius: 50%; width: 32px; height: 32px; border: none;"></button>
+          <!-- <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button> -->
           <a id="headerCart" href="cart/index.html" class="btn btn-sm d-flex align-items-center"
             style="background-color: #EAE7FD; position: relative;">
             <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
@@ -169,6 +164,37 @@
       </section>
     </main>
   </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7RJNXJvCyxJW59ge_30HcpDQrS3SGYCQ",
+      authDomain: "e-store-project-24928.firebaseapp.com",
+      projectId: "e-store-project-24928",
+      storageBucket: "e-store-project-24928.firebasestorage.app",
+      messagingSenderId: "108352256578",
+      appId: "1:108352256578:web:9abfa1487e033c09668bdb"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        userName.innerHTML = user.displayName;
+        document.getElementById('profileImg').innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%;">
+      `
+      } else {
+        setTimeout(() => {
+          // window.location.href = 'index.html'
+        }, 1000)
+      }
+    });
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="scripts/script.js"></script>
