@@ -125,13 +125,13 @@
           <div class="search me-2">
             <div class="input-group d-none d-md-flex">
               <input class="form-control form-control-sm" placeholder="Search among 100+ products">
-              <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button> 
+              <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
             </div>
           </div>
         </div>
         <div class="actions d-flex align-items-center gap-2">
           <p class="mb-0 fs-6">Hi, <span class="fw-semibold" id="userName"></span></p>
-          <button id="profileImg" style="border-radius: 50%; width: 32px; height: 32px; border: none;"></button>
+          <div id="profileImg"></div>
           <!-- <button class="btn btn-sm btn-outline-secondary d-md-none"><i class="bi bi-search"></i></button> -->
           <a id="headerCart" href="cart/index.html" class="btn btn-sm d-flex align-items-center"
             style="background-color: #EAE7FD; position: relative;">
@@ -185,7 +185,8 @@
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
-        userName.innerHTML = user.displayName;
+        const first = (user.displayName || '').trim().split(/\s+/)[0] || '';
+        document.getElementById('userName').textContent = first;
         document.getElementById('profileImg').innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%;">
       `
       } else {
