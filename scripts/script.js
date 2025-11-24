@@ -1,4 +1,6 @@
 import { sweatshirt } from '../data/sweatshirt.js';
+import { shirt } from '../data/shirt.js';
+import { jeans } from '../data/jeans.js';
 
 // Get cart from localStorage or initialize
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -36,7 +38,7 @@ const updateCartQuantity = () => {
 updateCartQuantity();
 
 // ================= PRODUCT PAGE ======================
-if (document.querySelector('.js-product-grid')) {
+if (document.querySelector('.js-sweatshirt-products')) {
   let productHTML = '';
 
   sweatshirt.forEach((sweat, index) => {
@@ -58,7 +60,7 @@ if (document.querySelector('.js-product-grid')) {
                 </div>
               </div>
 
-              <button onclick="addToCartBtn(${index})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
+              <button onclick="addToCartBtn('sweatshirt', ${index})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
                 <i class="bi bi-cart-plus"></i>
               </button>
             </div>
@@ -68,12 +70,91 @@ if (document.querySelector('.js-product-grid')) {
     `;
   });
 
-  document.querySelector('.js-product-grid').innerHTML = productHTML;
+  document.querySelector('.js-sweatshirt-products').innerHTML = productHTML;
+}
+
+if (document.querySelector('.js-shirt-products')) {
+  let shirtHTML = '';
+
+  shirt.forEach((shirts, i) => {
+    shirtHTML += `
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card product-card">
+          <div class="badge-wrap"><span class="badge bg-primary">NEW</span></div>
+
+          <div class="product-thumb">
+            <img src="${shirts.image}" class="card-img-top" alt="${shirts.productName}">
+          </div>
+
+          <div class="card-body">
+            <h6 class="card-title">${shirts.productName}</h6>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="price">$${shirts.price}
+                  <small class="text-muted text-decoration-line-through">$${shirts.price + 50}</small>
+                </div>
+              </div>
+
+              <button onclick="addToCartBtn('shirt', ${i})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
+                <i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  document.querySelector('.js-shirt-products').innerHTML = shirtHTML;
+}
+
+if (document.querySelector('.js-jeans-products')) {
+  let shirtHTML = '';
+
+  jeans.forEach((jean, i) => {
+    shirtHTML += `
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card product-card">
+          <div class="badge-wrap"><span class="badge bg-primary">NEW</span></div>
+
+          <div class="product-thumb">
+            <img src="${jean.image}" class="card-img-top" alt="${jean.productName}">
+          </div>
+
+          <div class="card-body">
+            <h6 class="card-title">${jean.productName}</h6>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="price">$${jean.price}
+                  <small class="text-muted text-decoration-line-through">$${jean.price + 50}</small>
+                </div>
+              </div>
+
+              <button onclick="addToCartBtn('jeans', ${i})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
+                <i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  document.querySelector('.js-jeans-products').innerHTML = shirtHTML;
 }
 
 // ================= ADD TO CART =======================
-window.addToCartBtn = (index) => {
-  const product = sweatshirt[index];
+window.addToCartBtn = (category, index) => {
+  let product;
+
+  if (category === 'sweatshirt') {
+    product = sweatshirt[index];
+  } else if (category === 'shirt') {
+    product = shirt[index];
+  } else if (category === 'jeans') {
+    product = jeans[index];
+  }
+
   const existingIndex = cart.findIndex(item => item.id === product.id);
 
   if (existingIndex !== -1) {
@@ -87,6 +168,7 @@ window.addToCartBtn = (index) => {
   renderCart();
   renderCheckout();
 };
+
 
 // ================= CART & CHECKOUT CALCULATIONS =========
 const taxFee = 2;
@@ -169,52 +251,6 @@ window.decreaseQty = (index) => {
   }
 };
 
-// function renderDelivery() {
-//   const deliveryContainer = document.querySelector('.js-delivery-items');
-//   if (!deliveryContainer) return;
-
-//   const citySelect = document.getElementById('city');
-//   const displayDiv = document.getElementById('displayCity');
-//   const displayDiv2 = document.getElementById('displayCity2');
-
-//   citySelect.addEventListener('change', () => {
-//     selectedPickupStation = citySelect.value; // update global variable
-//     displayDiv.innerHTML = selectedPickupStation;
-//     displayDiv2.innerHTML = selectedPickupStation;
-//   });
-//   console.log(selectedPickupStation)
-
-
-//   confirmDelivery.addEventListener('click', () => {
-//     const selectedCity = citySelect.value;
-
-//     if (selectedCity === 'Ogbomosho' || selectedCity === 'Ikeja' || selectedCity === 'Garki' || selectedCity === 'Ibadan' || selectedCity === 'Ilorin' || selectedCity === 'Oyo' || selectedCity === 'Taraba' || selectedCity === 'Abuja') {
-//       errorMessage.style.display = 'none';
-//       window.location.href = '../payment/payment.html';
-//     } else {
-//       errorMessage.style.display = 'block';
-//     }
-//   });
-
-//   todayDate.innerHTML = `${currentDay} ${currentMonthName}`;
-//   tomDate.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
-
-
-//   let html = '';
-//   cart.forEach((item, index) => {
-//     html += `
-//       <div class="d-flex align-items-center gap-3 mb-2">
-//         <img src="${item.image}" alt="product" class="img-thumbnail" style="width:80px; height:60px; object-fit:cover">
-//         <div class="flex-fill">
-//           <div class="fw-semibold mb-0">${item.productName}</div>
-//         </div>
-//       </div>
-//     `;
-//   });
-
-//   deliveryContainer.innerHTML = html;
-//   updateTotals();
-// }
 
 function renderDelivery() {
   const deliveryContainer = document.querySelector('.js-delivery-items');
