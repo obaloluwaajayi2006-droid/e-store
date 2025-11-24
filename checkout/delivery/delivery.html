@@ -21,7 +21,7 @@
 
     <main class="content flex-fill">
       <!-- Header (same as address) -->
-      <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom">
+      <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom position-sticky top-0" style="z-index: 1000; background-color: white !important;">
         <div class="d-flex align-items-center gap-3">
           <div class="logo d-flex align-items-center gap-2">
             <div class="logo-mark">E</div>
@@ -36,7 +36,8 @@
           </div> -->
         </div>
         <div class="actions d-flex align-items-center gap-2">
-          <a href="/cart/index.html">
+          <div id="profileImg"></div>
+          <a href="/cart/index.html" style="text-decoration: none;">
             <button id="headerCart" class="btn btn-sm d-flex align-items-center"
               style="background-color: #EAE7FD; position: relative;">
               <i class="bi bi-cart-fill me-1" style="color: #583BFF;"></i>
@@ -155,6 +156,35 @@
     </main>
   </div>
 
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7RJNXJvCyxJW59ge_30HcpDQrS3SGYCQ",
+      authDomain: "e-store-project-24928.firebaseapp.com",
+      projectId: "e-store-project-24928",
+      storageBucket: "e-store-project-24928.firebasestorage.app",
+      messagingSenderId: "108352256578",
+      appId: "1:108352256578:web:9abfa1487e033c09668bdb"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        document.getElementById('profileImg').innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%;">
+      `
+      } else {
+        setTimeout(() => {
+          // window.location.href = 'index.html'
+        }, 1000)
+      }
+    });
+  </script>        
   <script type="module" src="delivery.js"></script>
   <script type="module" src="/scripts/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

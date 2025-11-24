@@ -45,10 +45,6 @@ if (document.querySelector('.js-product-grid')) {
         <div class="card product-card">
           <div class="badge-wrap"><span class="badge bg-primary">NEW</span></div>
 
-          <button class="btn btn-wishlist js-add-to-wishlist">
-            <i class="bi bi-heart"></i>
-          </button>
-
           <div class="product-thumb">
             <img src="${sweat.image}" class="card-img-top" alt="${sweat.productName}">
           </div>
@@ -276,16 +272,7 @@ function renderDelivery() {
   updateTotals();
 }
 
-// function renderPayment() {
-//   const paymentContainer = document.querySelector('.js-payment-page');
-//   if (!paymentContainer) return;
 
-//   todayDate2.innerHTML = `${currentDay} ${currentMonthName}`;
-//   tomDate2.innerHTML = `${dayAfterTomorrowDay} ${dayAfterTomorrowMonth}`;
-//   const displayDiv = document.getElementById('displayCity');
-//   displayDiv.innerHTML = selectedPickupStation;
-//   console.log(selectedPickupStation)
-// }
 
 function renderPayment() {
   const paymentContainer = document.querySelector('.js-payment-page');

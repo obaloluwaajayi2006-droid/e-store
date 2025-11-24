@@ -33,7 +33,7 @@ main,
 }
 
 .sidebar {
-  width: 260px;
+  width: 360px;
   border-right: 1px solid #eef0f6
 }
 
@@ -286,8 +286,8 @@ canvas {
 .logo-mark {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  background: var(--brand);
+  border-radius: 8px;
+  background-color: var(--primary);
   color: #fff;
   display: flex;
   align-items: center;
