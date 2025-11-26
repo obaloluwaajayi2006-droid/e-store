@@ -30,12 +30,30 @@ console.log(dayAfterTomorrowDay, dayAfterTomorrowMonth); // Day after tomorrow
 // Ensure every cart item has quantity
 cart = cart.map(item => ({ ...item, quantity: item.quantity || 1 }));
 
-// Update header cart quantity (unique products only)
+// Update header cart quantity (show unique product count)
 const updateCartQuantity = () => {
-  const headerQty = document.querySelector('.js-cart-quantity');
-  if (headerQty) headerQty.textContent = cart.length;
+  // Show number of unique products in the cart (one badge per product)
+  const uniqueCount = cart.length;
+  const badges = document.querySelectorAll('.js-cart-quantity');
+  badges.forEach(el => { el.textContent = uniqueCount; });
+  const cartCountEl = document.getElementById('cartCount');
+  if (cartCountEl) cartCountEl.textContent = uniqueCount;
 };
+
+// expose globally so other scripts can call it
+window.updateCartQuantity = updateCartQuantity;
 updateCartQuantity();
+
+// Listen for external cart updates (e.g., landing.js) and sync internal cart
+window.addEventListener('cart:updated', () => {
+  try {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    updateCartQuantity();
+    renderCart();
+    renderCheckout();
+    updateTotals();
+  } catch (e) { console.warn('Error syncing cart from event', e); }
+});
 
 // ================= PRODUCT PAGE ======================
 if (document.querySelector('.js-sweatshirt-products')) {
@@ -143,6 +161,41 @@ if (document.querySelector('.js-jeans-products')) {
   document.querySelector('.js-jeans-products').innerHTML = shirtHTML;
 }
 
+if (document.querySelector('.js-pants-products')) {
+  let pantsHTML = '';
+
+  pants.forEach((pant, i) => {
+    pantsHTML += `
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card product-card">
+          <div class="badge-wrap"><span class="badge bg-primary">NEW</span></div>
+
+          <div class="product-thumb">
+            <img src="${pant.image}" class="card-img-top" alt="${pant.productName}">
+          </div>
+
+          <div class="card-body">
+            <h6 class="card-title">${pant.productName}</h6>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="price">$${pant.price}
+                  <small class="text-muted text-decoration-line-through">$${pant.price + 50}</small>
+                </div>
+              </div>
+
+              <button onclick="addToCartBtn('pant', ${i})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
+                <i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  document.querySelector('.js-pants-products').innerHTML = pantsHTML;
+}
+
 // ================= ADD TO CART =======================
 window.addToCartBtn = (category, index) => {
   let product;
@@ -153,7 +206,11 @@ window.addToCartBtn = (category, index) => {
     product = shirt[index];
   } else if (category === 'jeans') {
     product = jeans[index];
+  } else if (category === 'pant') {
+    product = pants[index];
   }
+
+  if (!product) return;
 
   const existingIndex = cart.findIndex(item => item.id === product.id);
 
@@ -167,6 +224,39 @@ window.addToCartBtn = (category, index) => {
   updateCartQuantity();
   renderCart();
   renderCheckout();
+
+  // Show a "mark" (check) icon on the clicked add-to-cart button, then revert after 1s
+  try {
+    const selector = `[onclick="addToCartBtn('${category}', ${index})"]`;
+    const btn = document.querySelector(selector);
+    if (btn) {
+      // Preserve previous state to restore later
+      const prevHtml = btn.innerHTML;
+      const prevClass = btn.className;
+      const prevTitle = btn.getAttribute('title');
+      const prevAria = btn.getAttribute('aria-pressed');
+
+      btn.innerHTML = `<i class="bi bi-check-lg"></i>`;
+      btn.classList.remove('btn-purple');
+      btn.classList.add('btn-success');
+      btn.setAttribute('title', 'Added to cart');
+      btn.setAttribute('aria-pressed', 'true');
+
+      // Revert after 1 second
+      setTimeout(() => {
+        // Ensure button still exists in DOM
+        if (!btn || !document.contains(btn)) return;
+
+        btn.innerHTML = prevHtml;
+        btn.className = prevClass;
+
+        if (prevTitle === null) btn.removeAttribute('title'); else btn.setAttribute('title', prevTitle);
+        if (prevAria === null) btn.removeAttribute('aria-pressed'); else btn.setAttribute('aria-pressed', prevAria);
+      }, 1000);
+    }
+  } catch (e) {
+    console.warn('Could not set mark icon on add button', e);
+  }
 };
 
 
