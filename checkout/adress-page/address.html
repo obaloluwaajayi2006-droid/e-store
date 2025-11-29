@@ -21,7 +21,8 @@
 <body>
 
   <!-- HEADER -->
-  <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom position-sticky top-0" style="z-index: 1000; background-color: #ffffff !important;">
+  <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom position-sticky top-0"
+    style="z-index: 1000; background-color: #ffffff !important;">
     <div class="d-flex align-items-center gap-3">
       <div class="logo d-flex align-items-center gap-2">
         <div class="logo-mark">E</div>
@@ -114,7 +115,8 @@
                 </div>
 
                 <div class="col-12 text-end mt-3">
-                  <button type="button" id="cancelBtn" class="btn btn-link me-2" style="text-decoration: none !important;">Cancel</button>
+                  <button type="button" id="cancelBtn" class="btn btn-link me-2"
+                    style="text-decoration: none !important;">Cancel</button>
                   <button onclick="addressSave()" type="button" id="saveBtn" class="btn btn-primary">Save</button>
                 </div>
               </div>
@@ -139,7 +141,7 @@
 
           <div class="d-flex justify-content-between small text-muted">
             <span>Items (<span class="js-total-quantity">0</span>)</span>
-            <span>$<span class="js-subtotal-price">0.00</span></span>
+            <span>₦<span class="js-subtotal-price">0.00</span></span>
           </div>
 
           <div class="d-flex justify-content-between small text-muted mt-2">
@@ -149,14 +151,14 @@
 
           <div class="d-flex justify-content-between small text-muted mt-2">
             <span>Tax</span>
-            <span>$<span class="js-tax-fee">0.00</span></span>
+            <span>₦<span class="js-tax-fee">0.00</span></span>
           </div>
 
           <hr>
 
           <div class="d-flex justify-content-between align-items-center mb-3">
             <strong>Total</strong>
-            <strong>$<span class="js-total-price">0.00</span></strong>
+            <strong>₦<span class="js-total-price">0.00</span></strong>
           </div>
 
           <button id="confirmOrder" class="btn btn-secondary w-100 disabled">Confirm Order</button>
@@ -192,7 +194,7 @@
       `
       } else {
         setTimeout(() => {
-          // window.location.href = 'index.html'
+          window.location.href = '/signup/index.html';
         }, 1000)
       }
     });

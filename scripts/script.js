@@ -1,6 +1,8 @@
 import { sweatshirt } from '../data/sweatshirt.js';
 import { shirt } from '../data/shirt.js';
 import { jeans } from '../data/jeans.js';
+import { sneakers } from '../data/sneakers.js';
+import { accesories } from '../data/accesories.js';
 
 // Get cart from localStorage or initialize
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -73,8 +75,8 @@ if (document.querySelector('.js-sweatshirt-products')) {
             <h6 class="card-title">${sweat.productName}</h6>
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <div class="price">$${sweat.price}
-                  <small class="text-muted text-decoration-line-through">$${sweat.price + 50}</small>
+                <div class="price">₦${sweat.price}
+                  <small class="text-muted text-decoration-line-through">₦${sweat.price + Number((Math.random() * 100).toFixed(0))}</small>
                 </div>
               </div>
 
@@ -108,8 +110,8 @@ if (document.querySelector('.js-shirt-products')) {
             <h6 class="card-title">${shirts.productName}</h6>
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <div class="price">$${shirts.price}
-                  <small class="text-muted text-decoration-line-through">$${shirts.price + 50}</small>
+                <div class="price">₦${shirts.price}
+                  <small class="text-muted text-decoration-line-through">₦${shirts.price + Number((Math.random() * 100).toFixed(0))}</small>
                 </div>
               </div>
 
@@ -143,8 +145,8 @@ if (document.querySelector('.js-jeans-products')) {
             <h6 class="card-title">${jean.productName}</h6>
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <div class="price">$${jean.price}
-                  <small class="text-muted text-decoration-line-through">$${jean.price + 50}</small>
+                <div class="price">₦${jean.price}
+                  <small class="text-muted text-decoration-line-through">₦${jean.price + Number((Math.random() * 100).toFixed(0))}</small>
                 </div>
               </div>
 
@@ -161,29 +163,29 @@ if (document.querySelector('.js-jeans-products')) {
   document.querySelector('.js-jeans-products').innerHTML = shirtHTML;
 }
 
-if (document.querySelector('.js-pants-products')) {
-  let pantsHTML = '';
+if (document.querySelector('.js-sneakers-products')) {
+  let sneakersHTML = '';
 
-  pants.forEach((pant, i) => {
-    pantsHTML += `
+  sneakers.forEach((sneakers, i) => {
+    sneakersHTML += `
       <div class="col-6 col-md-4 col-lg-3">
         <div class="card product-card">
           <div class="badge-wrap"><span class="badge bg-primary">NEW</span></div>
 
           <div class="product-thumb">
-            <img src="${pant.image}" class="card-img-top" alt="${pant.productName}">
+            <img src="${sneakers.image}" class="card-img-top" alt="${sneakers.productName}">
           </div>
 
           <div class="card-body">
-            <h6 class="card-title">${pant.productName}</h6>
+            <h6 class="card-title">${sneakers.productName}</h6>
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <div class="price">$${pant.price}
-                  <small class="text-muted text-decoration-line-through">$${pant.price + 50}</small>
+                <div class="price">₦${sneakers.price}
+                  <small class="text-muted text-decoration-line-through">₦${sneakers.price + Number((Math.random() * 100).toFixed(0))}</small>
                 </div>
               </div>
 
-              <button onclick="addToCartBtn('pant', ${i})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
+              <button onclick="addToCartBtn('sneakers', ${i})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
                 <i class="bi bi-cart-plus"></i>
               </button>
             </div>
@@ -193,7 +195,42 @@ if (document.querySelector('.js-pants-products')) {
     `;
   });
 
-  document.querySelector('.js-pants-products').innerHTML = pantsHTML;
+  document.querySelector('.js-sneakers-products').innerHTML = sneakersHTML;
+}
+
+if (document.querySelector('.js-acessories-products')) {
+  let acessoriesHTML = '';
+
+  accesories.forEach((acessory, i) => {
+    acessoriesHTML += `
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card product-card">
+          <div class="badge-wrap"><span class="badge bg-primary">NEW</span></div>
+
+          <div class="product-thumb">
+            <img src="${acessory.image}" class="card-img-top" alt="${acessory.productName}">
+          </div>
+
+          <div class="card-body">
+            <h6 class="card-title">${acessory.productName}</h6>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="price">₦${acessory.price}
+                  <small class="text-muted text-decoration-line-through">₦${acessory.price + Number((Math.random() * 100).toFixed(0))}</small>
+                </div>
+              </div>
+
+              <button onclick="addToCartBtn('accesories', ${i})" class="btn btn-purple btn-sm add-cart js-add-to-cart">
+                <i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  document.querySelector('.js-acessories-products').innerHTML = acessoriesHTML;
 }
 
 // ================= ADD TO CART =======================
@@ -206,8 +243,10 @@ window.addToCartBtn = (category, index) => {
     product = shirt[index];
   } else if (category === 'jeans') {
     product = jeans[index];
-  } else if (category === 'pant') {
-    product = pants[index];
+  } else if (category === 'sneakers') {
+    product = sneakers[index];
+  } else if (category === 'accesories') {
+    product = accesories[index];
   }
 
   if (!product) return;
@@ -280,7 +319,7 @@ function renderCart() {
         <img src="${item.image}" alt="${item.productName}" class="product-thumb">
         <div class="flex-fill"><div class="product-title">${item.productName}</div></div>
         <div class="text-end">
-          <div class="price">$<span class="item-price">${(item.price * item.quantity).toFixed(2)}</span></div>
+          <div class="price">₦<span class="item-price">${(item.price * item.quantity).toFixed(2)}</span></div>
           <div class="qty-controls mt-2 d-flex align-items-center justify-content-end gap-2">
             <button class="btn btn-outline-secondary btn-sm" onclick="decreaseQty(${index})">−</button>
             <input class="form-control qty-input text-center" value="${item.quantity}" readonly>
@@ -303,7 +342,7 @@ function renderCheckout() {
 }
 
 // ================= UPDATE TOTALS =======================
-function updateTotals() {
+export function updateTotals() {
   const qtyEl = document.querySelector('.js-total-quantity');
   const subtotalEl = document.querySelector('.js-subtotal-price');
   const totalEl = document.querySelector('.js-total-price');

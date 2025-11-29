@@ -99,13 +99,15 @@ body {
 
 .price {
   font-weight: 600;
+  font-size: 15px !important;
   color: #222
 }
 
 .price small {
   text-decoration: line-through;
   margin-left: 6px;
-  color: #9aa0b4
+  color: #9aa0b4;
+  font-size: 12px !important;
 }
 
 .badge-wrap {

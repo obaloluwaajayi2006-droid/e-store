@@ -49,7 +49,8 @@ body {
 }
 
 .cart-item .product-title {
-  font-weight: 500
+  font-weight: 500;
+  font-size: 15px !important;
 }
 
 .cart-item .product-sub {
@@ -126,7 +127,8 @@ body {
 }
 
 .price {
-  font-weight: 600
+  font-weight: 600;
+  font-size: 15px !important;
 }
 
 .animate-up {

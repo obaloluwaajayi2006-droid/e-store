@@ -23,17 +23,17 @@
       style="z-index: 1000 !important; background-color: #F6F6F6 !important;">
       <div class="brand mb-4 d-flex align-items-center">
         <div class="logo-mark">E</div>
-        <h4 class="m-0 text-decoration-none fs-4"><a href="index.html"
+        <h4 class="m-0 text-decoration-none fs-6"><a href="index.html"
             style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
       </div>
       <nav class="mb-3">
         <h6 class="mb-2">Category</h6>
         <ul class="list-unstyled small">
           <li class="py-2"><a href="shirt.html">Shirt</a></li>
-          <li class="py-2 active"><a href="index.html">Sweatshirt</a></li>
+          <li class="py-2 active"><a href="sweatshirt.html">Sweatshirt</a></li>
           <li class="py-2"><a href="jeans.html">Jeans</a></li>
-          <li class="py-2"><a href="#">Pants and Skirt</a></li>
-          <li class="py-2"><a href="#">Stuff and Accessories</a></li>
+          <li class="py-2"><a href="sneakers.html">Sneakers</a></li>
+          <li class="py-2"><a href="accesories.html">Stuff and Accessories</a></li>
         </ul>
       </nav>
 
@@ -79,11 +79,12 @@
           <h6 class="mb-2">Category</h6>
           <ul class="list-unstyled small">
             <li class="py-2"><a href="shirt.html" style="text-decoration: none; color: black;">Shirt</a></li>
-            <li class="py-2 active"><a href="index.html" style="text-decoration: none; color: black;">Sweatshirt</a>
+            <li class="py-2 active"><a href="sweatshirt.html"
+                style="text-decoration: none; color: black;">Sweatshirt</a>
             </li>
             <li class="py-2"><a href="jeans.html" style="text-decoration: none; color: black;">Jeans</a></li>
-            <li class="py-2"><a href="#" style="text-decoration: none; color: black;">Pants and Skirt</a></li>
-            <li class="py-2"><a href="#" style="text-decoration: none; color: black;">Stuff and Accessories</a></li>
+            <li class="py-2"><a href="sneakers.html" style="text-decoration: none; color: black;">Sneakers</a></li>
+            <li class="py-2"><a href="accesories.html" style="text-decoration: none; color: black;">Stuff and Accessories</a></li>
           </ul>
         </nav>
 
@@ -119,12 +120,12 @@
     <main class="content flex-fill position-sticky top-0">
       <header class="topbar d-flex align-items-center justify-content-between p-3 border-bottom position-sticky top-0"
         style="z-index: 1000; background-color: white !important;">
-        <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-2">
           <button class="btn btn-outline-secondary d-md-none" data-bs-toggle="offcanvas"
             data-bs-target="#mobileSidebar">
             <i class="bi bi-list"></i>
           </button>
-          <div class="logo d-lg-none d-sm-flex gap-2 align-items-center d-flex">
+          <div class="logo d-lg-none d-sm-flex gap-1 align-items-center d-flex">
             <div class="logo-mark">E</div>
             <h4 class="m-0 text-decoration-none fs-6"><a href="index.html"
                 style="text-decoration: none !important; color: #583BFF;"><b>E-store</b></a></h4>
@@ -137,7 +138,7 @@
           </div>
         </div>
         <div class="actions d-flex align-items-center gap-2">
-          <p class="mb-0 fs-6">Hi, <span class="fw-semibold" id="userName"></span></p>
+          <p class="mb-0" style="font-size: 12px !important;">Hi, <span class="fw-semibold" id="userName"></span></p>
           <div id="profileImg"></div>
           <a id="headerCart" href="cart/index.html" class="btn btn-sm d-flex align-items-center"
             style="background-color: #EAE7FD; position: relative;">
@@ -192,9 +193,9 @@
       if (user) {
         const first = (user.displayName || '').trim().split(/\s+/)[0] || '';
         document.getElementById('userName').textContent = first;
-        document.getElementById('profileImg').innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%;">`;
+        document.getElementById('profileImg').innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width: 25px; height: 25px; border-radius: 50%;">`;
       } else {
-        // not signed in
+        window.location.href = '/signup/index.html';
       }
     });
   </script>

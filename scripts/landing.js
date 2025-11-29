@@ -2,13 +2,18 @@
 import { sweatshirt } from '/data/sweatshirt.js';
 import { shirt } from '/data/shirt.js';
 import { jeans } from '/data/jeans.js';
+import { sneakers } from '../data/sneakers.js';
+import { accesories } from '../data/accesories.js';
+
 
 sweatshirt.forEach(p => p.category = "sweatshirt");
 shirt.forEach(p => p.category = "shirt");
 jeans.forEach(p => p.category = "jeans");
+sneakers.forEach(p => p.category = "sneakers");
+accesories.forEach(p => p.category = "accesories");
 
 
-const allProducts = [...sweatshirt, ...shirt, ...jeans];
+const allProducts = [...sweatshirt, ...shirt, ...jeans, ...accesories, ...sneakers];
 
 
 function getRandomProducts(array, count) {
@@ -20,7 +25,7 @@ function getRandomProducts(array, count) {
   return copy.slice(0, count);
 }
 
-const randomProducts = getRandomProducts(allProducts, 52);
+const randomProducts = getRandomProducts(allProducts, 60);
 
 
 const container = document.querySelector(".js-landing-products");
@@ -45,9 +50,9 @@ randomProducts.forEach(product => {
           <div class="d-flex justify-content-between align-items-center">
 
             <div class="price">
-              $${product.price}
+              ₦${product.price}
               <small class="text-muted text-decoration-line-through">
-                $${product.price + 50}
+                ₦${product.price + Number((Math.random() * 100).toFixed(0))}
               </small>
             </div>
 
