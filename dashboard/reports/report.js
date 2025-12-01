@@ -1,28 +1,4 @@
-// GET ORDERS
 const orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-// SORT ORDERS BY DATE DESCENDING (newest first)
-orders.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-// =========================
-// DISPLAY ORDERS IN TABLE
-// =========================
-let salesHTML = '';
-
-orders.forEach((sales, index) => {
-  salesHTML += `
-    <tr>
-      <td>${index + 1}</td>
-      <td>${sales.name}</td>
-      <td>₦${sales.totalPrice}</td>
-      <td>${sales.date}</td>
-      <td>${sales.reference}</td>
-    </tr>
-  `;
-});
-
-document.getElementById("salesOrder").innerHTML = salesHTML;
-
 
 
 // =========================
@@ -77,23 +53,19 @@ const salesData = Object.values(dailySales);
 
 
 // =========================
-// DISPLAY CHART.JS
+// DISPLAY CHART.JS AS BAR CHART
 // =========================
 const ctx = document.getElementById('dailyChart').getContext('2d');
 
 new Chart(ctx, {
-  type: 'line',
+  type: 'bar',  // <-- CHANGED TO BAR CHART
   data: {
-    labels: labels,  // now Mon, Tue, Wed...
+    labels: labels,  // Mon, Tue, Wed...
     datasets: [{
-      label: 'Total Sales Per Day (₦)',
+      label: 'Revenue (₦)',
       data: salesData,
-      borderWidth: 3,
-      tension: 0.4,
-      fill: true,
-      borderColor: 'blue',
-      pointRadius: 2,
-      pointHoverRadius: 7
+      backgroundColor: '#6b4eff',
+      borderWidth: 2
     }]
   },
   options: {
