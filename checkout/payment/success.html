@@ -26,20 +26,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px
+      padding: 24px
     }
 
     .success-card {
-      max-width: 760px;
+      max-width: 520px;
+      /* reduced width for a tighter receipt layout */
       width: 100%;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 12px 40px rgba(16, 24, 40, 0.08);
-      overflow: hidden
+      overflow: hidden;
+      margin: 0 12px;
     }
 
     .success-body {
-      padding: 36px
+      padding: 8px
     }
 
     .success-icon {
@@ -151,17 +153,34 @@
   </div>
 
   <script>
-    // const ref = new URLSearchParams(window.location.search).get("ref");
-    // document.getElementById("orderRef").innerText = ref;
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
-    const lastOrder = orders[orders.length - 1];
-    if (lastOrder && lastOrder.reference || lastOrder.totalPrice) {
-      document.getElementById("orderRef").innerText = lastOrder.reference;
-      document.getElementById("orderTotal").innerText = orders.totalPrice;
-    } else {
-      document.getElementById("orderRef").innerText = "No order Found!";
-    }
+    (function () {
+      try {
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        const lastOrder = orders.length ? orders[orders.length - 1] : null;
+        const orderRefEl = document.getElementById('orderRef');
+        const orderTotalEl = document.getElementById('orderTotal');
 
+        if (!orderRefEl || !orderTotalEl) return;
+
+        if (lastOrder) {
+          const ref = lastOrder.reference || lastOrder.ref || lastOrder.id || '—';
+          const total = lastOrder.total || lastOrder.totalPrice || lastOrder.amount || lastOrder.grandTotal || 0;
+          orderRefEl.innerText = ref;
+          // ensure numeric formatting
+          const n = Number(total) || 0;
+          orderTotalEl.innerText = n.toLocaleString();
+        } else {
+          orderRefEl.innerText = 'No order found';
+          orderTotalEl.innerText = '0';
+        }
+      } catch (e) {
+        console.warn('Could not read orders from localStorage', e);
+        const orderRefEl = document.getElementById('orderRef');
+        const orderTotalEl = document.getElementById('orderTotal');
+        if (orderRefEl) orderRefEl.innerText = 'No order found';
+        if (orderTotalEl) orderTotalEl.innerText = '0';
+      }
+    })();
   </script>
 
 </body>
