@@ -456,8 +456,62 @@ function renderPayment() {
   console.log("Pickup Station:", selectedPickupStation);
 }
 
-// ================= INITIAL PAGE LOAD ===================
 renderCart();
 renderDelivery()
 renderPayment()
 renderCheckout();
+
+
+document.getElementById("fakePayButton").addEventListener("click", () => {
+  const total = getTotalPrice();
+  console.log(total);
+  document.getElementById("fakePayAmount").innerText = "₦" + total;
+  document.getElementById("fakePaymentPopup").style.display = "flex"
+});
+
+// Cancel payment
+document.getElementById("cancelFakePayment").addEventListener("click", () => {
+  document.getElementById("fakePaymentPopup").style.display = "none"
+})
+
+// Confirm payment
+document.getElementById("confirmFakePayment").addEventListener("click", () => {
+  document.getElementById("confirmFakePayment").innerText = "Processing ...";
+  document.getElementById("confirmFakePayment").disabled = "true";
+
+  setTimeout(() => {
+    let orders = JSON.parse(localStorage.getItem("orders")) || []
+
+    let addressData = JSON.parse(localStorage.getItem('addressData')) || [];
+    const lastAdress = addressData[addressData.length - 1];
+    console.log(lastAdress.fName, lastAdress.lName)
+
+    deliveryName.innerHTML = lastAdress.fName + ' ' + lastAdress.lName;
+    deliveryAddress.innerHTML = lastAdress.add;
+    // Fake transaction reference
+    const txRef = "TX-" + Math.floor(Math.random() * 999999999);
+
+    // Save order
+    const newOrder = {
+      name: lastAdress.fName + ' ' + lastAdress.lName,
+      items: cart,
+      totalPrice: Number(getTotalPrice()),
+      reference: txRef,
+      date: new Date().toLocaleDateString()
+    };
+    orders.push(newOrder)
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    // Clear Cart
+    cart = [];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    if (window.updateCartQuantity) updateCartQuantity();
+
+    // Redirect
+    window.location.href = "/checkout/payment/success.html";
+  }, 2000);
+});
+window.fakePayButton = fakePayButton;
+
+// ================= INITIAL PAGE LOAD ===================
+

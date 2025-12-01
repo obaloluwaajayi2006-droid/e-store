@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-store -- Order Successful</title>
+</head>
+
+<body>
+  <h2>Payment Successful</h2>
+  <p>Your order has been placed</p>
+  <p>Ref: <span id="orderRef"></span> </p>
+  <span>Continue shoping <a href="/index.html">here</a></span>
+</body>
+
+<script>
+  // const ref = new URLSearchParams(window.location.search).get("ref");
+  // document.getElementById("orderRef").innerText = ref;
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  const lastOrder = orders[orders.length - 1];
+  if (lastOrder && lastOrder.reference) {
+    document.getElementById("orderRef").innerText = lastOrder.reference;
+  } else {
+    document.getElementById("orderRef").innerText = "No order Found!";
+  }
+
+</script>
+
+</html>

@@ -1,4 +1,4 @@
-let addressInfo = JSON.parse(localStorage.getItem('addressData')) || [];
+let addressData = JSON.parse(localStorage.getItem('addressData')) || [];
 
 const form = document.getElementById('addressForm');
 
@@ -12,7 +12,7 @@ export const addressSave = () => {
     errorMessage.style.display = 'block';
   } else {
     errorMessage.style.display = 'none';
-    const addressData = {
+    const newAddressData = {
       fName: firstName.value,
       lName: lastName.value,
       pNumber: phone.value,
@@ -24,6 +24,7 @@ export const addressSave = () => {
       errorMessage.style
     } else {
       errorMessage2.style.display = 'none';
+      addressData.push(newAddressData);
       localStorage.setItem('addressData', JSON.stringify(addressData));
       console.log(addressData);
       window.location.href = '../delivery/delivery.html';

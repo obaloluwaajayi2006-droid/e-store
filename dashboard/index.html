@@ -65,7 +65,7 @@
           <div class="d-flex gap-2 align-items-center">
             <div class="balance-card p-3 rounded shadow-sm text-end">
               <div class="small text-muted">Total Balance</div>
-              <div class="h4 mb-0">$<span id="balanceValue"></span></div>
+              <div class="h4 mb-0">₦<span id="totalRevenue"></span></div>
               <div class="small text-muted">Updated <span id="balanceTime">now</span></div>
             </div>
           </div>
@@ -89,7 +89,8 @@
               <div class="col-6 col-md-3">
                 <div class="card stat-card p-3">
                   <small class="text-muted">Product Orders</small>
-                  <div class="h5 mt-2">500 <span class="text-success">+25%</span></div>
+                  <div class="h5 mt-2"><span id="total-items-sold">500</span> <span class="text-success">+25%</span>
+                  </div>
                 </div>
               </div>
               <div class="col-6 col-md-3">
@@ -109,7 +110,8 @@
                       <option>30 days</option>
                     </select>
                   </div>
-                  <canvas id="salesChart" height="100"></canvas>
+                  <!-- <canvas id="salesChart" height="100"></canvas> -->
+                   <canvas id="dailyChart"></canvas>
                 </div>
               </div>
 
@@ -120,35 +122,15 @@
                     <table class="table table-borderless small align-middle mb-0">
                       <thead class="text-muted small">
                         <tr>
-                          <th>Transactions</th>
+                          <th>Order</th>
                           <th>Customer</th>
-                          <th>Product</th>
                           <th>Amount</th>
                           <th>Date</th>
+                          <th>Reference</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>#67890</td>
-                          <td>Dianne Russell</td>
-                          <td>Cashmere Wool Sweater</td>
-                          <td>$79.99</td>
-                          <td>06/12/2023</td>
-                        </tr>
-                        <tr>
-                          <td>#54321</td>
-                          <td>Esther Howard</td>
-                          <td>Ultra Skinny Denim Jeans</td>
-                          <td>$120.99</td>
-                          <td>05/12/2023</td>
-                        </tr>
-                        <tr>
-                          <td>#98765</td>
-                          <td>Kristin Watson</td>
-                          <td>Light Cotton Polo Shirt</td>
-                          <td>$34.87</td>
-                          <td>09/12/2023</td>
-                        </tr>
+                      <tbody id="salesOrder">
+
                       </tbody>
                     </table>
                   </div>
@@ -214,53 +196,54 @@
       </nav>
     </div>
   </div>
-
+  <script src="dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Theme colors (match root theme)
-    const PRIMARY = '#6b4eff';
+    // // Theme colors (match root theme)
+    // const PRIMARY = 'blue';
 
-    // Sales chart (line)
-    const salesCtx = document.getElementById('salesChart').getContext('2d');
-    const salesChart = new Chart(salesCtx, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-          label: 'Sales',
-          data: [120000, 150000, 110000, 180000, 160000, 195000, 140000, 150000, 165000, 170000, 180000, 200000],
-          borderColor: PRIMARY,
-          backgroundColor: 'rgba(107,78,255,0.12)',
-          tension: 0.4,
-          fill: true,
-          pointRadius: 3
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, ticks: { callback: v => '₦' + (v / 1000) + 'k' } } },
-        interaction: { mode: 'index', intersect: false }
-      }
-    });
+    // // Sales chart (line)
+    // const salesCtx = document.getElementById('salesChart').getContext('2d');
+    // const salesChart = new Chart(salesCtx, {
+    //   type: 'line',
+    //   data: {
+    //     labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+    //     datasets: [{
+    //       label: 'Sales',
+    //       data: [120000, 150000, 110000, 180000, 160000, 195000, 140000, 150000, 165000, 170000, 180000, 200000],
+    //       borderColor: PRIMARY,
+    //       backgroundColor: 'rgba(107,78,255,0.12)',
+    //       tension: 0.4,
+    //       fill: true,
+    //       pointRadius: 4
+    //     }]
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     plugins: { legend: { display: false } },
+    //     scales: { y: { beginAtZero: true, ticks: { callback: v => '₦' + (v / 1000) + 'k' } } },
+    //     interaction: { mode: 'index', intersect: false }
+    //   }
+    // });
 
-    // Pie chart
-    const pieCtx = document.getElementById('pieChart').getContext('2d');
-    const pieChart = new Chart(pieCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Shoes', 'Dresses', 'Jeans', 'Sweatshirt', 'Others'],
-        datasets: [{ data: [30, 28.3, 15.2, 14.16, 12.34], backgroundColor: ['#6b4eff', '#00c2a8', '#ffb86b', '#ffd6e0', '#9aa0b4'] }]
-      },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-    });
+    // // Pie chart
+    // const pieCtx = document.getElementById('pieChart').getContext('2d');
+    // const pieChart = new Chart(pieCtx, {
+    //   type: 'doughnut',
+    //   data: {
+    //     labels: ['Shoes', 'Dresses', 'Jeans', 'Sweatshirt', 'Others'],
+    //     datasets: [{ data: [30, 28.3, 15.2, 14.16, 12.34], backgroundColor: ['#6b4eff', '#00c2a8', '#ffb86b', '#ffd6e0', '#9aa0b4'] }]
+    //   },
+    //   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+    // });
 
-    // Live balance + sparkline
-    const balanceEl = document.getElementById('balanceValue');
-    const balanceTime = document.getElementById('balanceTime');
-    const sparkCtx = document.getElementById('balanceSpark').getContext('2d');
+    // // Live balance + sparkline
+    // const balanceEl = document.getElementById('balanceValue');
+    // const balanceTime = document.getElementById('balanceTime');
+    // const sparkCtx = document.getElementById('balanceSpark').getContext('2d');
 
-    // start with a random balance and populate sparkData
+    // // start with a random balance and populate sparkData
     // const MIN_BALANCE = 1000;
     // const MAX_BALANCE = 50000;
     // let balance = Math.random() * (MAX_BALANCE - MIN_BALANCE) + MIN_BALANCE;
@@ -308,10 +291,6 @@
 
     // // set balance once on load
     // setRandomBalanceOnce();
-
-
-    balanceValue.innerHTML = (Math.random() * 1000000).toFixed(2)
-
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,11 +1,9 @@
-import { updateTotals } from '/scripts/script.js';
+let addressData = JSON.parse(localStorage.getItem('addressData')) || [];
+const lastAdress = addressData[addressData.length - 1];
+console.log(lastAdress.fName, lastAdress.lName)
 
-let addressInfo = JSON.parse(localStorage.getItem('addressData')) || [];
-
-console.log(addressInfo.fName, addressInfo.lName)
-
-deliveryName.innerHTML = addressInfo.fName + ' ' + addressInfo.lName;
-deliveryAddress.innerHTML = addressInfo.add;
+deliveryName.innerHTML = lastAdress.fName + ' ' + lastAdress.lName;
+deliveryAddress.innerHTML = lastAdress.add;
 
 // Paystack and firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
@@ -35,58 +33,3 @@ onAuthStateChanged(auth, (user) => {
     }, 1000)
   }
 });
-
-// const confirmBtn = document.getElementById("confirmPayment");
-
-// // Replace with your real Paystack public key
-// const PAYSTACK_PUBLIC_KEY = "YOUR_PUBLIC_KEY_HERE";
-
-// // Assuming you have total amount displayed in .js-total-price
-// confirmBtn.addEventListener("click", async () => {
-
-//   const user = auth.currentUser;
-//   if (!user) {
-//     alert("You must be logged in to pay.");
-//     return;
-//   }
-
-//   // Get the total amount from your cart display (assume number only)
-//   const totalEl = document.querySelector(".js-total-price");
-//   const totalAmount = Number(totalEl.textContent.replace(/[^0-9]/g, "")) * 100; // convert to kobo
-
-//   // Initialize Paystack
-//   let handler = PaystackPop.setup({
-//     key: PAYSTACK_PUBLIC_KEY,
-//     email: user.email,
-//     amount: totalAmount,
-//     currency: "NGN",
-//     ref: "order_" + Date.now(), // unique reference
-
-//     callback: function (response) {
-//       console.log("Payment successful!", response);
-
-//       // OPTIONAL: Save payment to Firestore or mark order complete
-//       // Example: saveOrderToFirestore(response.reference);
-
-//       // Redirect to success page
-//       window.location.href = "../order-success.html";
-//     },
-
-//     onClose: function () {
-//       alert("Payment cancelled.");
-//     }
-//   });
-
-//   handler.openIframe();
-// });
-
-const confirmBtn = () => {
-  // console.log(qtyEl);
-  alert('hi!');
-}
-// updateTotals.forEach(() => {
-
-// })
-
-console.log(updateTotals);
-window.confirmBtn = confirmBtn;
