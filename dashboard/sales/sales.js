@@ -1,12 +1,11 @@
-// GET ORDERS
+// get orders from local storage
 const orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 // SORT ORDERS BY DATE DESCENDING (newest first)
 orders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-// =========================
-// DISPLAY ORDERS IN TABLE
-// =========================
+
+// DISPLAY SALES ORDERS IN TABLE
 let salesHTML = '';
 
 orders.forEach((sales, index) => {
@@ -25,9 +24,8 @@ document.getElementById("salesOrder").innerHTML = salesHTML;
 
 
 
-// =========================
-// TOTAL REVENUE (ALL-TIME)
-// =========================
+
+
 let totalRevenue = 0;
 
 orders.forEach((balance) => {
@@ -40,9 +38,7 @@ if (revenueElement) {
 }
 
 
-// =========================
-// GET TOTAL SALES PER DAY
-// =========================
+// get total sales per week
 function getSalesByWeekday(orders) {
   const weekdays = {
     "Mon": 0,
@@ -67,30 +63,27 @@ function getSalesByWeekday(orders) {
 const weekdaySales = getSalesByWeekday(orders);
 
 
-// =========================
-// ROTATE LABELS SO TODAY IS LAST
-// =========================
+
+
+
 const baseLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-// Get today's weekday (Mon, Tue, Wed...)
+
 const today = new Date().toLocaleDateString("en-US", { weekday: "short" });
 
-// Find index of today
+
 const todayIndex = baseLabels.indexOf(today);
 
-// Rotate so today is LAST, not first
+
 const rotatedLabels = [
   ...baseLabels.slice(todayIndex + 1),
   ...baseLabels.slice(0, todayIndex + 1)
 ];
 
-// Now convert weekdaySales into rotated order
+
 const rotatedData = rotatedLabels.map(day => weekdaySales[day]);
 
 
-// =========================
-// DISPLAY CHART.JS (BAR CHART)
-// =========================
 const ctx = document.getElementById('dailyChart').getContext('2d');
 
 new Chart(ctx, {

@@ -144,6 +144,8 @@ main,
   animation: pulseAnim .65s ease both
 }
 
+
+
 /* transactions rows slide and stagger */
 .table-responsive tbody tr {
   animation: fadeInUp .42s both;

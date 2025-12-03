@@ -133,7 +133,12 @@
                       <tbody id="salesOrder">
 
                       </tbody>
+
                     </table>
+                    <a href="./sales/index.html"
+                      class="text-center text-decoration-underline d-flex align-items-center justify-content-center"
+                      style="font-size: 14px !important;">
+                      See more ></a>
                   </div>
                 </div>
               </div>
@@ -228,16 +233,16 @@
     //   }
     // });
 
-    // // Pie chart
-    // const pieCtx = document.getElementById('pieChart').getContext('2d');
-    // const pieChart = new Chart(pieCtx, {
-    //   type: 'doughnut',
-    //   data: {
-    //     labels: ['Shoes', 'Dresses', 'Jeans', 'Sweatshirt', 'Others'],
-    //     datasets: [{ data: [30, 28.3, 15.2, 14.16, 12.34], backgroundColor: ['#6b4eff', '#00c2a8', '#ffb86b', '#ffd6e0', '#9aa0b4'] }]
-    //   },
-    //   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-    // });
+    // Pie chart
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    const pieChart = new Chart(pieCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Shoes', 'Dresses', 'Jeans', 'Sweatshirt', 'Others'],
+        datasets: [{ data: [30, 28.3, 15.2, 14.16, 12.34], backgroundColor: ['#6b4eff', '#00c2a8', '#ffb86b', '#ffd6e0', '#9aa0b4'] }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+    });
 
     // // Live balance + sparkline
     // const balanceEl = document.getElementById('balanceValue');

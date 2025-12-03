@@ -1,18 +1,15 @@
-// =========================
 // GET ORDERS
-// =========================
-const orders = JSON.parse(localStorage.getItem("orders")) || [];
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-// SORT ORDERS BY DATE DESCENDING (newest first)
+
 orders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-// =========================
-// DISPLAY ORDERS IN TABLE
-// =========================
-let salesHTML = '';
+const recentOrders = orders.slice(0, 2);
 
-orders.forEach((sales, index) => {
-  salesHTML += `
+// DISPLAY RECENT ORDERS
+let recentHTML = "";
+recentOrders.forEach((sales, index) => {
+  recentHTML += `
     <tr>
       <td>${index + 1}</td>
       <td>${sales.name}</td>
@@ -23,11 +20,11 @@ orders.forEach((sales, index) => {
   `;
 });
 
-document.getElementById("salesOrder").innerHTML = salesHTML;
+document.getElementById("salesOrder").innerHTML = recentHTML;
 
-// =========================
-// TOTAL REVENUE (ALL-TIME)
-// =========================
+
+
+// total revenue (all-time)
 let totalRevenue = 0;
 
 orders.forEach(order => {
@@ -40,9 +37,7 @@ if (revenueElement) revenueElement.textContent = totalRevenue.toFixed(2);
 const revenueElement2 = document.getElementById("totalRevenue2");
 if (revenueElement2) revenueElement2.textContent = totalRevenue.toFixed(2);
 
-// =========================
-// TOTAL SALES THIS MONTH
-// =========================
+
 const now = new Date();
 const currentMonth = now.getMonth(); // 0-11
 const currentYear = now.getFullYear();
@@ -59,20 +54,19 @@ orders.forEach(order => {
 const monthlyRevenueElement = document.getElementById("totalThisMonth");
 if (monthlyRevenueElement) monthlyRevenueElement.textContent = totalThisMonth.toFixed(2);
 
-// =========================
-// TOTAL PRODUCTS SOLD THIS YEAR
-// =========================
+
+// total quantity sold this year
 let totalQuantityThisYear = 0;
 
 orders.forEach(order => {
   const orderDate = new Date(order.date);
   if (orderDate.getFullYear() === currentYear) {
-    // Case 1: each order has a single quantity property
+
     if (order.quantity) {
       totalQuantityThisYear += Number(order.quantity);
     }
 
-    // Case 2: each order has multiple items with quantity
+
     if (order.items && Array.isArray(order.items)) {
       order.items.forEach(item => {
         totalQuantityThisYear += Number(item.quantity || 0);
@@ -84,9 +78,8 @@ orders.forEach(order => {
 const quantityYearElement = document.getElementById("totalQuantityYear");
 if (quantityYearElement) quantityYearElement.textContent = totalQuantityThisYear;
 
-// =========================
-// GET TOTAL SALES FOR EACH WEEKDAY
-// =========================
+
+
 function getSalesByWeekday(orders) {
   const weekdays = {
     "Mon": 0,
@@ -111,30 +104,26 @@ function getSalesByWeekday(orders) {
 const weekdaySales = getSalesByWeekday(orders);
 
 
-// =========================
-// ROTATE LABELS SO TODAY IS LAST
-// =========================
+
 const baseLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-// Get today's weekday (Mon, Tue, Wed...)
+
 const today = new Date().toLocaleDateString("en-US", { weekday: "short" });
 
-// Find index of today
+
 const todayIndex = baseLabels.indexOf(today);
 
-// Rotate so today is LAST, not first
+
 const rotatedLabels = [
   ...baseLabels.slice(todayIndex + 1),
   ...baseLabels.slice(0, todayIndex + 1)
 ];
 
-// Now convert weekdaySales into rotated order
+
 const rotatedData = rotatedLabels.map(day => weekdaySales[day]);
 
 
-// =========================
-// DISPLAY CHART.JS (BAR CHART)
-// =========================
+// display chart
 const ctx = document.getElementById('dailyChart').getContext('2d');
 
 new Chart(ctx, {
